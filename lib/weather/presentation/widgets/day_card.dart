@@ -11,51 +11,70 @@ class DayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white.withOpacity(0.3),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            '01:00',
-            style: TextStyle(
-              color: Colors.grey,
-            ),
-          ),
-          Image.asset(
-            'assets/$asset.png',
-            width: 50.0,
-          ),
-          const Text(
-            'Mostly Sunny',
-            style: TextStyle(
-              color: Colors.grey,
-            ),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
-                '37',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                  color: Colors.white,
-                ),
+    return Padding(
+      padding: const EdgeInsets.all(3.0),
+      child: Card(
+        color: Colors.white.withOpacity(0.3),
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          height: 200,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const _GreyText(label: '01:00'),
+              Image.asset(
+                'assets/$asset.png',
+                width: 50.0,
               ),
-              Text(
-                '°C',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 10.0,
-                  color: Colors.white,
-                ),
+              const _GreyText(label: 'Mostly Sunny'),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    '37',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    '°C',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
+      ),
+    );
+  }
+}
+
+class _GreyText extends StatelessWidget {
+  const _GreyText({
+    Key? key,
+    required this.label,
+  }) : super(key: key);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Text(
+        label,
+        style: const TextStyle(
+          color: Colors.grey,
+        ),
       ),
     );
   }

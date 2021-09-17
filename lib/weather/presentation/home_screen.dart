@@ -22,24 +22,30 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const CurrentWeather(),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: const [
-                      DayCard(asset: 'sunny'),
-                      DayCard(asset: 'froggy'),
-                      DayCard(asset: 'cloudy'),
-                      DayCard(asset: 'sunny'),
-                      DayCard(asset: 'froggy'),
-                      DayCard(asset: 'cloudy'),
-                    ],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 50.0),
+                    child: CurrentWeather(),
                   ),
-                ),
-              ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: const [
+                        DayCard(asset: 'sunny'),
+                        DayCard(asset: 'froggy'),
+                        DayCard(asset: 'cloudy'),
+                        DayCard(asset: 'sunny'),
+                        DayCard(asset: 'froggy'),
+                        DayCard(asset: 'cloudy'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
