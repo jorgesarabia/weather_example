@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_example/city/application/add_city/add_city_bloc.dart';
 
-class SearchField extends StatefulWidget {
+class SearchField extends StatelessWidget {
   const SearchField({Key? key}) : super(key: key);
-
-  @override
-  State<SearchField> createState() => _SearchFieldState();
-}
-
-class _SearchFieldState extends State<SearchField> {
-  bool _hasText = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,25 +26,11 @@ class _SearchFieldState extends State<SearchField> {
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
-              onChanged: (value) => setState(() => _hasText = value.isNotEmpty),
+              onChanged: (value) {
+                BlocProvider.of<AddCityBloc>(context).add(AddCityEvent.getListByQuery(value));
+              },
             ),
           ),
-          if (_hasText)
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  print('Hola');
-                },
-              ),
-            ),
         ],
       ),
     );
