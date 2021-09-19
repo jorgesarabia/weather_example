@@ -1,7 +1,7 @@
 import 'package:weather_example/weather/domain/country.dart';
 
-class Autocomplete {
-  Autocomplete({
+class AutocompleteModel {
+  AutocompleteModel({
     required this.version,
     required this.key,
     required this.type,
@@ -11,8 +11,8 @@ class Autocomplete {
     required this.administrativeArea,
   });
 
-  factory Autocomplete.fromJson(Map<String, dynamic> json) {
-    return Autocomplete(
+  factory AutocompleteModel.fromJson(Map<String, dynamic> json) {
+    return AutocompleteModel(
       version: json['Version'],
       key: json['Key'],
       type: json['Type'],
