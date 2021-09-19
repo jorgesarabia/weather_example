@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:dartz/dartz.dart';
+import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:weather_example/app/domain/basic_error.dart';
 import 'package:weather_example/app/infrastructure/network_service.dart';
 import 'package:weather_example/city/domain/i_city_facade.dart';
 import 'package:weather_example/weather/domain/autocomplete_model.dart';
@@ -17,20 +20,26 @@ class CityRepository implements ICityFacade {
   final NetworkService networkService;
 
   @override
-  Future<bool> addCity({
+  Future<Either<BasicError, bool>> addCity({
     required AutocompleteModel city,
     required bool isDefault,
   }) async {
-    final savedCity = await db.insert('Cities', {
-      'id': city.key,
-      'autocompleteModel': jsonEncode(city.toJson()),
-      'isDefault': isDefault,
-      'lastWeather': '',
-      'lastMeasure': '',
-    });
+    int savedCity = 0;
+    try {
+      savedCity = await db.insert('Cities', {
+        'id': city.key,
+        'autocompleteModel': jsonEncode(city.toJson()),
+        'isDefault': isDefault,
+        'lastWeather': '',
+        'lastMeasure': '',
+      });
+    } on PlatformException catch (e) {
+      return left(BasicError.error(e));
+    } on Exception catch (e) {
+      return left(BasicError.error(e));
+    }
 
-    print(savedCity);
-    return false;
+    return right(savedCity != 0);
   }
 
   @override

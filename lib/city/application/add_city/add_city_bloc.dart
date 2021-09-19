@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:weather_example/app/domain/basic_error.dart';
 import 'package:weather_example/city/domain/i_city_facade.dart';
 import 'package:weather_example/weather/domain/autocomplete_model.dart';
 import 'package:weather_example/weather/domain/country.dart';
@@ -33,7 +34,10 @@ class AddCityBloc extends Bloc<AddCityEvent, AddCityState> {
       return;
     }
 
-    yield state.copyWith(isLoading: true);
+    yield state.copyWith(
+      isLoading: true,
+      basicError: BasicError.empty(),
+    );
 
     // final cities = await iCityFacade.searchList(q: event.q);
     await Future.delayed(const Duration(milliseconds: 1500));
@@ -54,11 +58,26 @@ class AddCityBloc extends Bloc<AddCityEvent, AddCityState> {
   }
 
   Stream<AddCityState> _mapAddCityToListEventToState(_AddCityToList event) async* {
-    yield state.copyWith(isLoading: true);
+    yield state.copyWith(
+      isLoading: true,
+      basicError: BasicError.empty(),
+    );
 
     final addCity = await iCityFacade.addCity(isDefault: event.isDefault, city: event.city);
 
-    yield state.copyWith(isLoading: false);
+    yield* addCity.fold(
+      (l) async* {
+        yield state.copyWith(
+          isLoading: false,
+          basicError: l,
+        );
+      },
+      (r) async* {
+        yield state.copyWith(
+          isLoading: false,
+        );
+      },
+    );
   }
 
   List<AutocompleteModel> _mockListOfCities() {
