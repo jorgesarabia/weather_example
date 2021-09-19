@@ -63,10 +63,19 @@ Future<void> _showMyDialog(BuildContext context, AutocompleteModel city) async {
             },
           ),
           TextButton(
-            child: const Text('Add'),
+            child: const Text('Add as default'),
             onPressed: () {
               BlocProvider.of<AddCityBloc>(context).add(
                 AddCityEvent.addCityToList(city: city, isDefault: true),
+              );
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: const Text('Add city'),
+            onPressed: () {
+              BlocProvider.of<AddCityBloc>(context).add(
+                AddCityEvent.addCityToList(city: city, isDefault: false),
               );
               Navigator.of(context).pop();
             },
