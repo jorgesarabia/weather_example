@@ -13,6 +13,28 @@ class SearchBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AddCityBloc, AddCityState>(
       builder: (context, state) {
+        if (state.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (state.listOfCities.isEmpty) {
+          return Card(
+            color: Colors.white.withOpacity(0.2),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'There is no cities to show',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          );
+        }
+
         return Column(
           children: List.generate(
             state.listOfCities.length,
@@ -25,15 +47,3 @@ class SearchBody extends StatelessWidget {
     );
   }
 }
-
-// CityCard(
-//   city: AutocompleteModel(
-//     version: 1,
-//     key: '9243',
-//     type: 'City',
-//     rank: 55,
-//     localizedName: 'Clorinda',
-//     country: Country(iD: 'AR', localizedName: 'Argentina'),
-//     administrativeArea: Country(iD: 'P', localizedName: 'Formosa'),
-//   ),
-// ),

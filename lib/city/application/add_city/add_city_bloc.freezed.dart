@@ -180,7 +180,7 @@ abstract class _AddCityState implements AddCityState {
 class _$AddCityEventTearOff {
   const _$AddCityEventTearOff();
 
-  _GetListByQueryEvent getListByQuery(dynamic q) {
+  _GetListByQueryEvent getListByQuery(String q) {
     return _GetListByQueryEvent(
       q,
     );
@@ -202,14 +202,14 @@ const $AddCityEvent = _$AddCityEventTearOff();
 mixin _$AddCityEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(dynamic q) getListByQuery,
+    required TResult Function(String q) getListByQuery,
     required TResult Function(AutocompleteModel city, bool isDefault)
         addCityToList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(dynamic q)? getListByQuery,
+    TResult Function(String q)? getListByQuery,
     TResult Function(AutocompleteModel city, bool isDefault)? addCityToList,
     required TResult orElse(),
   }) =>
@@ -250,7 +250,7 @@ abstract class _$GetListByQueryEventCopyWith<$Res> {
   factory _$GetListByQueryEventCopyWith(_GetListByQueryEvent value,
           $Res Function(_GetListByQueryEvent) then) =
       __$GetListByQueryEventCopyWithImpl<$Res>;
-  $Res call({dynamic q});
+  $Res call({String q});
 }
 
 /// @nodoc
@@ -269,7 +269,10 @@ class __$GetListByQueryEventCopyWithImpl<$Res>
     Object? q = freezed,
   }) {
     return _then(_GetListByQueryEvent(
-      q == freezed ? _value.q : q,
+      q == freezed
+          ? _value.q
+          : q // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -282,7 +285,7 @@ class _$_GetListByQueryEvent
   const _$_GetListByQueryEvent(this.q);
 
   @override
-  final dynamic q;
+  final String q;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -318,7 +321,7 @@ class _$_GetListByQueryEvent
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(dynamic q) getListByQuery,
+    required TResult Function(String q) getListByQuery,
     required TResult Function(AutocompleteModel city, bool isDefault)
         addCityToList,
   }) {
@@ -328,7 +331,7 @@ class _$_GetListByQueryEvent
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(dynamic q)? getListByQuery,
+    TResult Function(String q)? getListByQuery,
     TResult Function(AutocompleteModel city, bool isDefault)? addCityToList,
     required TResult orElse(),
   }) {
@@ -362,9 +365,9 @@ class _$_GetListByQueryEvent
 }
 
 abstract class _GetListByQueryEvent implements AddCityEvent {
-  const factory _GetListByQueryEvent(dynamic q) = _$_GetListByQueryEvent;
+  const factory _GetListByQueryEvent(String q) = _$_GetListByQueryEvent;
 
-  dynamic get q => throw _privateConstructorUsedError;
+  String get q => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$GetListByQueryEventCopyWith<_GetListByQueryEvent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -456,7 +459,7 @@ class _$_AddCityToList with DiagnosticableTreeMixin implements _AddCityToList {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(dynamic q) getListByQuery,
+    required TResult Function(String q) getListByQuery,
     required TResult Function(AutocompleteModel city, bool isDefault)
         addCityToList,
   }) {
@@ -466,7 +469,7 @@ class _$_AddCityToList with DiagnosticableTreeMixin implements _AddCityToList {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(dynamic q)? getListByQuery,
+    TResult Function(String q)? getListByQuery,
     TResult Function(AutocompleteModel city, bool isDefault)? addCityToList,
     required TResult orElse(),
   }) {

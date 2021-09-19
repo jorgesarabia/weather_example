@@ -15,9 +15,9 @@ class SearchField extends StatelessWidget {
             child: TextFormField(
               autofocus: true,
               decoration: const InputDecoration(
-                hintText: 'Add a new city',
+                hintText: 'Type the city name',
                 hintStyle: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
                 contentPadding: EdgeInsets.all(10),
