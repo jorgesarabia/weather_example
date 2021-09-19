@@ -53,7 +53,13 @@ class AddCityBloc extends Bloc<AddCityEvent, AddCityState> {
     }
   }
 
-  Stream<AddCityState> _mapAddCityToListEventToState(_AddCityToList event) async* {}
+  Stream<AddCityState> _mapAddCityToListEventToState(_AddCityToList event) async* {
+    yield state.copyWith(isLoading: true);
+
+    final addCity = await iCityFacade.addCity(isDefault: event.isDefault, city: event.city);
+
+    yield state.copyWith(isLoading: false);
+  }
 
   List<AutocompleteModel> _mockListOfCities() {
     return AutocompleteModel.listFromJson(jsonDecode(value));

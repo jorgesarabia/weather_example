@@ -17,7 +17,19 @@ class CityRepository implements ICityFacade {
   final NetworkService networkService;
 
   @override
-  Future<bool> addCity({required bool isDefault}) async {
+  Future<bool> addCity({
+    required AutocompleteModel city,
+    required bool isDefault,
+  }) async {
+    final savedCity = await db.insert('Cities', {
+      'id': city.key,
+      'autocompleteModel': jsonEncode(city.toJson()),
+      'isDefault': isDefault,
+      'lastWeather': '',
+      'lastMeasure': '',
+    });
+
+    print(savedCity);
     return false;
   }
 

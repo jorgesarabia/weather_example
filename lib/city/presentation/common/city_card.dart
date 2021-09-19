@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_example/city/application/add_city/add_city_bloc.dart';
 import 'package:weather_example/weather/domain/autocomplete_model.dart';
 
 class CityCard extends StatelessWidget {
@@ -43,7 +45,7 @@ Future<void> _showMyDialog(BuildContext context, AutocompleteModel city) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: true,
-    builder: (BuildContext context) {
+    builder: (_) {
       return AlertDialog(
         title: const Text('Add city to my list'),
         content: SingleChildScrollView(
@@ -63,6 +65,9 @@ Future<void> _showMyDialog(BuildContext context, AutocompleteModel city) async {
           TextButton(
             child: const Text('Add'),
             onPressed: () {
+              BlocProvider.of<AddCityBloc>(context).add(
+                AddCityEvent.addCityToList(city: city, isDefault: true),
+              );
               Navigator.of(context).pop();
             },
           ),
