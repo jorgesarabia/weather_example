@@ -44,4 +44,11 @@ class AutocompleteModel {
 
     return data;
   }
+
+  static List<AutocompleteModel> listFromJson(List<dynamic>? json) {
+    if (json == null) {
+      return <AutocompleteModel>[];
+    }
+    return json.map((v) => AutocompleteModel.fromJson(v as Map<String, dynamic>)).toList();
+  }
 }

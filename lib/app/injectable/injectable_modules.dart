@@ -19,7 +19,7 @@ abstract class InjectableModule {
           autocompleteModel TEXT,
           isDefault TEXT,
           lastWeather TEXT,
-          lastMeasure TEXT,
+          lastMeasure TEXT
         )
         ''';
         await db.execute(query);

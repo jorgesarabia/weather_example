@@ -1,16 +1,20 @@
+import 'dart:convert';
+
 import 'package:injectable/injectable.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:weather_example/app/infrastructure/network_service.dart';
 import 'package:weather_example/city/domain/i_city_facade.dart';
 import 'package:weather_example/weather/domain/autocomplete_model.dart';
-import 'package:http/http.dart' as http;
 
 @LazySingleton(as: ICityFacade)
 class CityRepository implements ICityFacade {
   const CityRepository({
     required this.db,
+    required this.networkService,
   });
 
   final Database db;
+  final NetworkService networkService;
 
   @override
   Future<bool> addCity({required bool isDefault}) async {
@@ -19,20 +23,17 @@ class CityRepository implements ICityFacade {
 
   @override
   Future<List<AutocompleteModel>> searchList({required String q}) async {
+    final httpResponse = await networkService.get(
+      endpoint: 'cities/autocomplete',
+      params: 'q=$q',
+    );
     if (httpResponse.statusCode == 200) {
-      final cities = <CityModel>[];
+      // final cities = <AutocompleteModel>[];
       final responseBody = jsonDecode(httpResponse.body);
 
-      responseBody['items'].forEach((city) {
-        cities.add(CityModel.fromJson(city as Map<String, dynamic>));
-      });
-
-      await preferences!.setString(Keys.listOfCities, jsonEncode(cities));
-
-      return right(cities);
+      return AutocompleteModel.listFromJson(responseBody);
     }
 
-    return left(unit);
     return [];
   }
 }

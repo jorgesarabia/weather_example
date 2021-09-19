@@ -9,7 +9,7 @@ class AddCityState with _$AddCityState {
 
   factory AddCityState.initial() {
     return const AddCityState(
-      isLoading: true,
+      isLoading: false,
       listOfCities: [],
     );
   }
