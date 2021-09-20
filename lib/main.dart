@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_example/app/injectable/injection.dart';
 import 'package:weather_example/city/application/cities_bloc/cities_bloc.dart';
 import 'package:weather_example/city/presentation/add_city/add_city_screen.dart';
-import 'package:weather_example/weather/presentation/home_screen.dart';
+import 'package:weather_example/weather/presentation/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

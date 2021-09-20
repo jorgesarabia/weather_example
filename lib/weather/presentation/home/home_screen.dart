@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_example/app/presentation/common_snack_bar.dart';
 import 'package:weather_example/city/application/cities_bloc/cities_bloc.dart';
 import 'package:weather_example/city/presentation/add_city/add_city_screen.dart';
-import 'package:weather_example/weather/presentation/widgets/current_weather.dart';
-import 'package:weather_example/weather/presentation/widgets/day_card.dart';
+import 'package:weather_example/weather/presentation/weather_detail/weather_detail.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -49,33 +48,7 @@ class HomeScreen extends StatelessWidget {
                 );
               }
 
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 50.0),
-                        child: CurrentWeather(),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: const [
-                            DayCard(asset: 'sunny'),
-                            DayCard(asset: 'froggy'),
-                            DayCard(asset: 'cloudy'),
-                            DayCard(asset: 'sunny'),
-                            DayCard(asset: 'froggy'),
-                            DayCard(asset: 'cloudy'),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
+              return WeatherDetail(cityModel: state.defaultCity);
             },
           ),
         ],

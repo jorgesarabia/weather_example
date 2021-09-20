@@ -5,13 +5,13 @@ class Metric {
     required this.unitType,
   });
 
-  final int value;
+  final double value;
   final String unit;
   final int unitType;
 
   factory Metric.fromJson(Map<String, dynamic> json) {
     return Metric(
-      value: json['Value'] as int,
+      value: json['Value'] as double,
       unit: json['Unit'] as String,
       unitType: json['UnitType'] as int,
     );

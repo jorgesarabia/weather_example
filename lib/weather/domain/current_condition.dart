@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:weather_example/weather/domain/temperature.dart';
 
 class CurrentConditions {
@@ -31,10 +32,17 @@ class CurrentConditions {
       weatherIcon: json['WeatherIcon'],
       hasPrecipitation: json['HasPrecipitation'],
       isDayTime: json['IsDayTime'],
-      temperature: json['Temperature'],
+      temperature: Temperature.fromJson(json['Temperature']),
       mobileLink: json['MobileLink'],
       link: json['Link'],
     );
+  }
+
+  static List<CurrentConditions> listFromJson(List<dynamic>? json) {
+    if (json == null) {
+      return <CurrentConditions>[];
+    }
+    return json.map((v) => CurrentConditions.fromJson(v as Map<String, dynamic>)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -51,5 +59,13 @@ class CurrentConditions {
     data['Link'] = link;
 
     return data;
+  }
+
+  String get currentTemperature => temperature.metric!.value.ceil().toString();
+
+  String get measuredWhen {
+    final date = DateTime.fromMillisecondsSinceEpoch(epochTime * 1000);
+
+    return DateFormat.yMMMd().add_jm().format(date);
   }
 }
