@@ -41,6 +41,8 @@ class CityRepository implements ICityFacade {
 
       if (savedCity != 0) {
         await db.update(table, {'isDefault': false}, where: 'id != ${city.key}');
+      } else {
+        return left(BasicError.error(Exception('Can not save the city')));
       }
     } on PlatformException catch (e) {
       return left(BasicError.error(e));
@@ -48,7 +50,7 @@ class CityRepository implements ICityFacade {
       return left(BasicError.error(e));
     }
 
-    return right(savedCity != 0);
+    return right(true);
   }
 
   @override

@@ -74,6 +74,7 @@ class AddCityBloc extends Bloc<AddCityEvent, AddCityState> {
       (r) async* {
         yield state.copyWith(
           isLoading: false,
+          newCityWasAdded: r,
         );
       },
     );
