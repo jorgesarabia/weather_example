@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_example/app/injectable/injection.dart';
 import 'package:weather_example/city/domain/city_model.dart';
 import 'package:weather_example/weather/application/weather_bloc.dart';
@@ -20,43 +21,46 @@ class WeatherDetail extends StatelessWidget {
       create: (_) {
         final bloc = getIt<WeatherBloc>();
         bloc.add(WeatherEvent.getCurrentCondition(cityModel.id));
-        // bloc.add(WeatherEvent.getFiveDays(cityModel.id));
+        bloc.add(WeatherEvent.getFiveDays(cityModel.id));
 
         return bloc;
       },
       child: BlocConsumer<WeatherBloc, WeatherState>(
         listener: (context, state) {},
         builder: (context, state) {
-          if (state.currentConditions == null) {
-            return Container();
-          }
-
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 50.0),
-                    child: CurrentWeather(
-                      currentConditions: state.currentConditions!,
-                      cityModel: cityModel,
+                  if (state.currentConditions != null)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 50.0),
+                      child: CurrentWeather(
+                        currentConditions: state.currentConditions!,
+                        cityModel: cityModel,
+                      ),
                     ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: const [
-                        DayCard(asset: 'sunny'),
-                        DayCard(asset: 'froggy'),
-                        DayCard(asset: 'cloudy'),
-                        DayCard(asset: 'sunny'),
-                        DayCard(asset: 'froggy'),
-                        DayCard(asset: 'cloudy'),
-                      ],
+                  if (state.fiveDays != null)
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(
+                          state.fiveDays!.dailyForecasts.length,
+                          (index) {
+                            final daily = state.fiveDays!.dailyForecasts[index];
+                            return DayCard(
+                              date: _day(daily.epochDate),
+                              icon: daily.day.icon.toString(),
+                              iconPhase: daily.day.iconPhrase,
+                              maxTemperature: daily.temperature.maximum?.value.toString() ?? '',
+                              minTemperature: daily.temperature.minimum?.value.toString() ?? '',
+                            );
+                          },
+                        ),
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),
@@ -64,5 +68,11 @@ class WeatherDetail extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String _day(int epochTime) {
+    final date = DateTime.fromMillisecondsSinceEpoch(epochTime * 1000);
+
+    return DateFormat.E().format(date);
   }
 }

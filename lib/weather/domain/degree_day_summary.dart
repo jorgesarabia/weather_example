@@ -11,7 +11,7 @@ class DegreeDaySummary {
 
   factory DegreeDaySummary.fromJson(Map<String, dynamic> json) {
     return DegreeDaySummary(
-      heating: Metric.fromJson(json['Metric']),
+      heating: Metric.fromJson(json['Heating']),
       cooling: Metric.fromJson(json['Cooling']),
     );
   }
@@ -19,7 +19,7 @@ class DegreeDaySummary {
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
 
-    data['Metric'] = heating.toJson();
+    data['Heating'] = heating.toJson();
     data['Cooling'] = cooling.toJson();
 
     return data;

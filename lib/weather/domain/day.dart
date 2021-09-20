@@ -18,15 +18,13 @@ class Day {
   Metric rain;
   Metric snow;
   Metric ice;
-  int hoursOfPrecipitation;
-  int hoursOfRain;
-  int hoursOfSnow;
-  int hoursOfIce;
+  double hoursOfPrecipitation;
+  double hoursOfRain;
+  double hoursOfSnow;
+  double hoursOfIce;
   int cloudCover;
   Metric evapotranspiration;
   Metric solarIrradiance;
-  String precipitationType;
-  String precipitationIntensity;
 
   Day({
     required this.icon,
@@ -52,8 +50,6 @@ class Day {
     required this.cloudCover,
     required this.evapotranspiration,
     required this.solarIrradiance,
-    required this.precipitationType,
-    required this.precipitationIntensity,
   });
 
   factory Day.fromJson(Map<String, dynamic> json) {
@@ -81,8 +77,6 @@ class Day {
       cloudCover: json['CloudCover'],
       evapotranspiration: Metric.fromJson(json['Evapotranspiration']),
       solarIrradiance: Metric.fromJson(json['SolarIrradiance']),
-      precipitationType: json['PrecipitationType'],
-      precipitationIntensity: json['PrecipitationIntensity'],
     );
   }
 
@@ -112,8 +106,6 @@ class Day {
     data['CloudCover'] = cloudCover;
     data['Evapotranspiration'] = evapotranspiration.toJson();
     data['SolarIrradiance'] = solarIrradiance.toJson();
-    data['PrecipitationType'] = precipitationType;
-    data['PrecipitationIntensity'] = precipitationIntensity;
 
     return data;
   }

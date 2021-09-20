@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class DayCard extends StatelessWidget {
-  const DayCard({
-    Key? key,
-    required this.asset,
-  }) : super(key: key);
+  const DayCard(
+      {Key? key,
+      required this.icon,
+      required this.iconPhase,
+      required this.minTemperature,
+      required this.maxTemperature,
+      required this.date})
+      : super(key: key);
 
-  final String asset;
+  final String icon;
+  final String iconPhase;
+  final String minTemperature;
+  final String maxTemperature;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
@@ -22,34 +30,13 @@ class DayCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const _GreyText(label: '01:00'),
+              _GreyText(label: date),
               Image.asset(
-                'assets/$asset.png',
-                width: 50.0,
+                'assets/$icon-s.png',
               ),
-              const _GreyText(label: 'Mostly Sunny'),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    '37',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    '°C',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 10.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
+              _GreyText(label: iconPhase),
+              _LabelDegrees(label: maxTemperature),
+              _LabelDegrees(label: minTemperature),
             ],
           ),
         ),
@@ -76,6 +63,40 @@ class _GreyText extends StatelessWidget {
           color: Colors.grey,
         ),
       ),
+    );
+  }
+}
+
+class _LabelDegrees extends StatelessWidget {
+  const _LabelDegrees({
+    Key? key,
+    required this.label,
+  }) : super(key: key);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 20.0,
+            color: Colors.white,
+          ),
+        ),
+        const Text(
+          '°C',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 10.0,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 }

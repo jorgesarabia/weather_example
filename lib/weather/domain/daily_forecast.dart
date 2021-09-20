@@ -1,17 +1,17 @@
 import 'package:weather_example/weather/domain/day.dart';
 import 'package:weather_example/weather/domain/degree_day_summary.dart';
+import 'package:weather_example/weather/domain/min_max_temperature.dart';
 import 'package:weather_example/weather/domain/moon.dart';
 import 'package:weather_example/weather/domain/sun.dart';
-import 'package:weather_example/weather/domain/temperature.dart';
 
 class DailyForecasts {
   String date;
   int epochDate;
   Sun sun;
   Moon moon;
-  Temperature temperature;
-  Temperature realFeelTemperature;
-  Temperature realFeelTemperatureShade;
+  MinMaxTemperature temperature;
+  MinMaxTemperature realFeelTemperature;
+  MinMaxTemperature realFeelTemperatureShade;
   double hoursOfSun;
   DegreeDaySummary degreeDaySummary;
   Day day;
@@ -43,9 +43,9 @@ class DailyForecasts {
       epochDate: json['EpochDate'],
       sun: Sun.fromJson(json['Sun']),
       moon: Moon.fromJson(json['Moon']),
-      temperature: Temperature.fromJson(json['Temperature']),
-      realFeelTemperature: Temperature.fromJson(json['RealFeelTemperature']),
-      realFeelTemperatureShade: Temperature.fromJson(json['RealFeelTemperatureShade']),
+      temperature: MinMaxTemperature.fromJson(json['Temperature']),
+      realFeelTemperature: MinMaxTemperature.fromJson(json['RealFeelTemperature']),
+      realFeelTemperatureShade: MinMaxTemperature.fromJson(json['RealFeelTemperatureShade']),
       hoursOfSun: json['HoursOfSun'],
       degreeDaySummary: DegreeDaySummary.fromJson(json['DegreeDaySummary']),
       day: Day.fromJson(json['Day']),

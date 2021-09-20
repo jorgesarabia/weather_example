@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:weather_example/app/domain/basic_error.dart';
 import 'package:weather_example/weather/domain/current_condition.dart';
+import 'package:weather_example/weather/domain/five_days.dart';
 import 'package:weather_example/weather/domain/i_weather_facade.dart';
 
 @LazySingleton(as: IWeatherFacade)
@@ -16,7 +17,11 @@ class WeatherRepository implements IWeatherFacade {
   }
 
   @override
-  Future<void> getFiveDays({required int cityId}) async {}
+  Future<Either<BasicError, FiveDays>> getFiveDays({required int cityId}) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    return right(FiveDays.fromJson(jsonDecode(fiveDays)));
+  }
 }
 
 const currentConditions =

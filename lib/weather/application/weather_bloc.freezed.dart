@@ -18,10 +18,12 @@ class _$WeatherStateTearOff {
 
   _WeatherState call(
       {required bool isLoading,
-      required CurrentConditions? currentConditions}) {
+      required CurrentConditions? currentConditions,
+      required FiveDays? fiveDays}) {
     return _WeatherState(
       isLoading: isLoading,
       currentConditions: currentConditions,
+      fiveDays: fiveDays,
     );
   }
 }
@@ -34,6 +36,7 @@ mixin _$WeatherState {
   bool get isLoading => throw _privateConstructorUsedError;
   CurrentConditions? get currentConditions =>
       throw _privateConstructorUsedError;
+  FiveDays? get fiveDays => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $WeatherStateCopyWith<WeatherState> get copyWith =>
@@ -45,7 +48,10 @@ abstract class $WeatherStateCopyWith<$Res> {
   factory $WeatherStateCopyWith(
           WeatherState value, $Res Function(WeatherState) then) =
       _$WeatherStateCopyWithImpl<$Res>;
-  $Res call({bool isLoading, CurrentConditions? currentConditions});
+  $Res call(
+      {bool isLoading,
+      CurrentConditions? currentConditions,
+      FiveDays? fiveDays});
 }
 
 /// @nodoc
@@ -60,6 +66,7 @@ class _$WeatherStateCopyWithImpl<$Res> implements $WeatherStateCopyWith<$Res> {
   $Res call({
     Object? isLoading = freezed,
     Object? currentConditions = freezed,
+    Object? fiveDays = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed
@@ -70,6 +77,10 @@ class _$WeatherStateCopyWithImpl<$Res> implements $WeatherStateCopyWith<$Res> {
           ? _value.currentConditions
           : currentConditions // ignore: cast_nullable_to_non_nullable
               as CurrentConditions?,
+      fiveDays: fiveDays == freezed
+          ? _value.fiveDays
+          : fiveDays // ignore: cast_nullable_to_non_nullable
+              as FiveDays?,
     ));
   }
 }
@@ -81,7 +92,10 @@ abstract class _$WeatherStateCopyWith<$Res>
           _WeatherState value, $Res Function(_WeatherState) then) =
       __$WeatherStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool isLoading, CurrentConditions? currentConditions});
+  $Res call(
+      {bool isLoading,
+      CurrentConditions? currentConditions,
+      FiveDays? fiveDays});
 }
 
 /// @nodoc
@@ -98,6 +112,7 @@ class __$WeatherStateCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = freezed,
     Object? currentConditions = freezed,
+    Object? fiveDays = freezed,
   }) {
     return _then(_WeatherState(
       isLoading: isLoading == freezed
@@ -108,6 +123,10 @@ class __$WeatherStateCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
           ? _value.currentConditions
           : currentConditions // ignore: cast_nullable_to_non_nullable
               as CurrentConditions?,
+      fiveDays: fiveDays == freezed
+          ? _value.fiveDays
+          : fiveDays // ignore: cast_nullable_to_non_nullable
+              as FiveDays?,
     ));
   }
 }
@@ -116,16 +135,20 @@ class __$WeatherStateCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
 
 class _$_WeatherState implements _WeatherState {
   const _$_WeatherState(
-      {required this.isLoading, required this.currentConditions});
+      {required this.isLoading,
+      required this.currentConditions,
+      required this.fiveDays});
 
   @override
   final bool isLoading;
   @override
   final CurrentConditions? currentConditions;
+  @override
+  final FiveDays? fiveDays;
 
   @override
   String toString() {
-    return 'WeatherState(isLoading: $isLoading, currentConditions: $currentConditions)';
+    return 'WeatherState(isLoading: $isLoading, currentConditions: $currentConditions, fiveDays: $fiveDays)';
   }
 
   @override
@@ -137,14 +160,18 @@ class _$_WeatherState implements _WeatherState {
                     .equals(other.isLoading, isLoading)) &&
             (identical(other.currentConditions, currentConditions) ||
                 const DeepCollectionEquality()
-                    .equals(other.currentConditions, currentConditions)));
+                    .equals(other.currentConditions, currentConditions)) &&
+            (identical(other.fiveDays, fiveDays) ||
+                const DeepCollectionEquality()
+                    .equals(other.fiveDays, fiveDays)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
-      const DeepCollectionEquality().hash(currentConditions);
+      const DeepCollectionEquality().hash(currentConditions) ^
+      const DeepCollectionEquality().hash(fiveDays);
 
   @JsonKey(ignore: true)
   @override
@@ -155,13 +182,16 @@ class _$_WeatherState implements _WeatherState {
 abstract class _WeatherState implements WeatherState {
   const factory _WeatherState(
       {required bool isLoading,
-      required CurrentConditions? currentConditions}) = _$_WeatherState;
+      required CurrentConditions? currentConditions,
+      required FiveDays? fiveDays}) = _$_WeatherState;
 
   @override
   bool get isLoading => throw _privateConstructorUsedError;
   @override
   CurrentConditions? get currentConditions =>
       throw _privateConstructorUsedError;
+  @override
+  FiveDays? get fiveDays => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$WeatherStateCopyWith<_WeatherState> get copyWith =>
