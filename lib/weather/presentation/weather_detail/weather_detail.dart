@@ -38,7 +38,6 @@ class WeatherDetail extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 50.0),
                       child: CurrentWeather(
-                        currentConditions: state.currentConditions!,
                         cityModel: cityModel,
                       ),
                     ),

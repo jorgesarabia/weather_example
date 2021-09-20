@@ -19,7 +19,8 @@ abstract class InjectableModule {
           autocompleteModel TEXT,
           isDefault INTEGER,
           lastWeather TEXT,
-          lastMeasure INTEGER
+          fiveDays TEXT,
+          lastMeasureSinceEpoch INTEGER
         )
         ''';
         await db.execute(query);

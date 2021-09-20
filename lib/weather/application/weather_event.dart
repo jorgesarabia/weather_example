@@ -4,4 +4,5 @@ part of 'weather_bloc.dart';
 class WeatherEvent with _$WeatherEvent {
   const factory WeatherEvent.getCurrentCondition(int cityKey) = _GetCurrentCondition;
   const factory WeatherEvent.getFiveDays(int cityKey) = _GetFiveDaysCondition;
+  const factory WeatherEvent.setFromLocal(CityModel city) = _SetFromLocal;
 }

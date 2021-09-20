@@ -35,8 +35,9 @@ class CityRepository implements ICityFacade {
         'id': city.key,
         'autocompleteModel': jsonEncode(city.toJson()),
         'isDefault': isDefault,
-        'lastWeather': '',
-        'lastMeasure': defaultDate.millisecondsSinceEpoch,
+        'lastWeather': null,
+        'fiveDays': null,
+        'lastMeasureSinceEpoch': defaultDate.millisecondsSinceEpoch,
       });
 
       if (savedCity != 0) {

@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:weather_example/weather/domain/autocomplete_model.dart';
 import 'package:weather_example/weather/domain/country.dart';
+import 'package:weather_example/weather/domain/current_condition.dart';
+import 'package:weather_example/weather/domain/five_days.dart';
 
 class CityModel {
   CityModel({
@@ -9,7 +11,8 @@ class CityModel {
     required this.city,
     required this.isDefault,
     required this.lastWeather,
-    required this.lastMeasure,
+    required this.lastMeasureSinceEpoch,
+    required this.fiveDays,
   });
 
   factory CityModel.empty() {
@@ -25,8 +28,9 @@ class CityModel {
         administrativeArea: Country(iD: '', localizedName: ''),
       ),
       isDefault: false,
-      lastWeather: '',
-      lastMeasure: DateTime.now(),
+      lastWeather: null,
+      fiveDays: null,
+      lastMeasureSinceEpoch: DateTime.now().millisecondsSinceEpoch,
     );
   }
 
@@ -36,14 +40,16 @@ class CityModel {
       city: AutocompleteModel.fromJson(jsonDecode(json['autocompleteModel'])),
       isDefault: json['isDefault'] == 1,
       lastWeather: json['lastWeather'],
-      lastMeasure: json['lastMeasure'],
+      lastMeasureSinceEpoch: json['lastMeasureSinceEpoch'],
+      fiveDays: json['fiveDays'],
     );
   }
 
   AutocompleteModel city;
   bool isDefault;
-  dynamic lastWeather;
-  dynamic lastMeasure;
+  CurrentConditions? lastWeather;
+  FiveDays? fiveDays;
+  int lastMeasureSinceEpoch;
   int id;
 
   static List<CityModel> listFromJson(List<dynamic>? json) {

@@ -48,7 +48,13 @@ class HomeScreen extends StatelessWidget {
                 );
               }
 
-              return WeatherDetail(cityModel: state.defaultCity);
+              if (state.hasDefaultCity) {
+                return WeatherDetail(cityModel: state.defaultCity);
+              }
+
+              return const Center(
+                child: Text('No city'),
+              );
             },
           ),
         ],

@@ -6,13 +6,15 @@ class WeatherState with _$WeatherState {
     required bool isLoading,
     required CurrentConditions? currentConditions,
     required FiveDays? fiveDays,
+    required CityModel cityModel,
   }) = _WeatherState;
 
   factory WeatherState.initial() {
-    return const WeatherState(
+    return WeatherState(
       isLoading: false,
       currentConditions: null,
       fiveDays: null,
+      cityModel: CityModel.empty(),
     );
   }
 }

@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:weather_example/city/domain/city_model.dart';
-import 'package:weather_example/weather/domain/current_condition.dart';
 
 class CurrentWeather extends StatelessWidget {
   const CurrentWeather({
     Key? key,
-    required this.currentConditions,
     required this.cityModel,
   }) : super(key: key);
 
-  final CurrentConditions currentConditions;
   final CityModel cityModel;
 
   @override
@@ -24,7 +21,7 @@ class CurrentWeather extends StatelessWidget {
             Transform.scale(
               scale: 2,
               child: Image.asset(
-                'assets/${currentConditions.weatherIcon}-s.png',
+                'assets/${cityModel.lastWeather!.weatherIcon}-s.png',
               ),
             ),
             const SizedBox(width: 15),
@@ -39,7 +36,7 @@ class CurrentWeather extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  currentConditions.measuredWhen,
+                  cityModel.lastWeather!.measuredWhen,
                   style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 15.0,
@@ -56,7 +53,7 @@ class CurrentWeather extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  currentConditions.weatherText,
+                  cityModel.lastWeather!.weatherText,
                   style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 25.0,
@@ -64,7 +61,7 @@ class CurrentWeather extends StatelessWidget {
                 ),
               ),
               _CurrentTemperature(
-                temeperature: currentConditions.currentTemperature,
+                temeperature: cityModel.lastWeather!.currentTemperature,
               ),
             ],
           ),
