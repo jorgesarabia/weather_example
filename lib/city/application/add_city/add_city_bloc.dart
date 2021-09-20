@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:weather_example/app/domain/basic_error.dart';
 import 'package:weather_example/city/domain/i_city_facade.dart';
 import 'package:weather_example/weather/domain/autocomplete_model.dart';
-import 'package:weather_example/weather/domain/country.dart';
 
 part 'add_city_state.dart';
 part 'add_city_event.dart';

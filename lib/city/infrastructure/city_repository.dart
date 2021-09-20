@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:weather_example/app/domain/basic_error.dart';
 import 'package:weather_example/app/infrastructure/network_service.dart';
+import 'package:weather_example/city/domain/city_model.dart';
 import 'package:weather_example/city/domain/i_city_facade.dart';
 import 'package:weather_example/weather/domain/autocomplete_model.dart';
 
@@ -19,6 +20,8 @@ class CityRepository implements ICityFacade {
   final Database db;
   final NetworkService networkService;
 
+  static String table = 'Cities';
+
   @override
   Future<Either<BasicError, bool>> addCity({
     required AutocompleteModel city,
@@ -26,7 +29,7 @@ class CityRepository implements ICityFacade {
   }) async {
     int savedCity = 0;
     try {
-      savedCity = await db.insert('Cities', {
+      savedCity = await db.insert(table, {
         'id': city.key,
         'autocompleteModel': jsonEncode(city.toJson()),
         'isDefault': isDefault,
@@ -56,5 +59,22 @@ class CityRepository implements ICityFacade {
     }
 
     return [];
+  }
+
+  @override
+  Future<Option<CityModel>> getDefaultCity() async {
+    final myDefaultQuery = await db.query(table, where: 'isDefault = true');
+    List<CityModel> values = CityModel.listFromJson(myDefaultQuery);
+
+    if (values.isEmpty) {
+      final firstValue = await db.query(table);
+      values = CityModel.listFromJson(firstValue);
+
+      if (values.isEmpty) {
+        return none();
+      }
+    }
+
+    return optionOf(values.first);
   }
 }

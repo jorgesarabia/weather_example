@@ -17,7 +17,7 @@ abstract class InjectableModule {
         CREATE TABLE Cities(
           id INTEGER PRIMARY KEY,
           autocompleteModel TEXT,
-          isDefault TEXT,
+          isDefault INTEGER,
           lastWeather TEXT,
           lastMeasure TEXT
         )

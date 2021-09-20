@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_example/app/injectable/injection.dart';
+import 'package:weather_example/city/application/cities_bloc/cities_bloc.dart';
 import 'package:weather_example/city/presentation/add_city/add_city_screen.dart';
 import 'package:weather_example/weather/presentation/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureInjection();
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<CitiesBloc>(
+          create: (_) => getIt<CitiesBloc>()..add(const CitiesEvent.getDefaultCity()),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const AddCityScreen(),
+      home: const HomeScreen(),
     );
   }
 }
