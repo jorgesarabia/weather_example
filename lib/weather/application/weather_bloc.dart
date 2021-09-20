@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:weather_example/app/domain/basic_error.dart';
 import 'package:weather_example/city/domain/city_model.dart';
-import 'package:weather_example/weather/domain/current_condition.dart';
-import 'package:weather_example/weather/domain/five_days.dart';
 import 'package:weather_example/weather/domain/i_weather_facade.dart';
 
 part 'weather_state.dart';
@@ -19,30 +18,53 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   @override
   Stream<WeatherState> mapEventToState(WeatherEvent event) async* {
     yield* event.map(
-      getCurrentCondition: _mapGetCurrentConditionEventToState,
-      getFiveDays: _mapGetFiveDaysEventToState,
-      setFromLocal: (e) async* {
-        yield state.copyWith(cityModel: e.city);
-      },
+      setFromLocal: _mapSetFromLocalEventToState,
+      getCurrentConditionAndFiveDays: _mapGetCurrentConditionEventToState,
     );
   }
 
-  Stream<WeatherState> _mapGetFiveDaysEventToState(_GetFiveDaysCondition event) async* {
+  Stream<WeatherState> _mapSetFromLocalEventToState(_SetFromLocal event) async* {
     yield state.copyWith(isLoading: true);
 
-    final answer = await weatherFacade.getCurrentCondition(cityId: event.cityKey);
+    final currentCity = event.city;
+
+    final measuredTime = currentCity.lastMeasureSinceEpoch;
+    final now = DateTime.now();
+    final diff = now.subtract(const Duration(hours: 12)).millisecondsSinceEpoch;
+
+    if (measuredTime < diff || currentCity.fiveDays != null || currentCity.lastWeather != null) {
+      add(WeatherEvent.getCurrentConditionAndFiveDays(currentCity.id));
+    } else {
+      state.copyWith(
+        isLoading: false,
+        cityModel: currentCity,
+      );
+    }
+  }
+
+  Stream<WeatherState> _getFiveDays(_GetCurrentCondition event) async* {
+    yield state.copyWith(isLoading: true);
+
+    final answer = await weatherFacade.getFiveDays(cityId: event.cityKey);
+
+    final currentCity = state.cityModel;
 
     yield* answer.fold(
       (l) async* {
+        currentCity.fiveDays = null;
+
         yield state.copyWith(
           isLoading: false,
-          currentConditions: null,
+          basicError: l,
+          cityModel: currentCity,
         );
       },
       (r) async* {
+        currentCity.fiveDays = r;
+
         yield state.copyWith(
           isLoading: false,
-          currentConditions: r,
+          cityModel: currentCity,
         );
       },
     );
@@ -53,19 +75,28 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
     final answer = await weatherFacade.getCurrentCondition(cityId: event.cityKey);
 
+    final currentCity = state.cityModel;
+
     yield* answer.fold(
       (l) async* {
+        currentCity.lastWeather = null;
+
         yield state.copyWith(
           isLoading: false,
-          currentConditions: null,
+          basicError: l,
+          cityModel: currentCity,
         );
       },
       (r) async* {
+        currentCity.lastWeather = r;
+
         yield state.copyWith(
           isLoading: false,
-          currentConditions: r,
+          cityModel: currentCity,
         );
       },
     );
+
+    yield* _getFiveDays(event);
   }
 }

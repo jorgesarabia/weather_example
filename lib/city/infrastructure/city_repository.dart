@@ -57,6 +57,7 @@ class CityRepository implements ICityFacade {
   @override
   Future<List<AutocompleteModel>> searchList({required String q}) async {
     final httpResponse = await networkService.get(
+      base: 'locations',
       endpoint: 'cities/autocomplete',
       params: 'q=$q',
     );

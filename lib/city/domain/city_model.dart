@@ -39,9 +39,10 @@ class CityModel {
       id: json['id'],
       city: AutocompleteModel.fromJson(jsonDecode(json['autocompleteModel'])),
       isDefault: json['isDefault'] == 1,
-      lastWeather: json['lastWeather'],
+      lastWeather:
+          json['lastWeather'] != null ? CurrentConditions.listFromJson(jsonDecode(json['lastWeather'])).first : null,
       lastMeasureSinceEpoch: json['lastMeasureSinceEpoch'],
-      fiveDays: json['fiveDays'],
+      fiveDays: json['fiveDays'] != null ? FiveDays.fromJson(jsonDecode(json['fiveDays'])) : null,
     );
   }
 

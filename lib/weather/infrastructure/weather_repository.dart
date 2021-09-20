@@ -2,25 +2,64 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:weather_example/app/domain/basic_error.dart';
+import 'package:weather_example/app/infrastructure/network_service.dart';
 import 'package:weather_example/weather/domain/current_condition.dart';
 import 'package:weather_example/weather/domain/five_days.dart';
 import 'package:weather_example/weather/domain/i_weather_facade.dart';
 
 @LazySingleton(as: IWeatherFacade)
 class WeatherRepository implements IWeatherFacade {
+  WeatherRepository({
+    required this.db,
+    required this.networkService,
+  });
+
+  final Database db;
+  final NetworkService networkService;
+
+  static String table = 'Cities';
+
   @override
   Future<Either<BasicError, CurrentConditions>> getCurrentCondition({required int cityId}) async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    final httpResponse = await networkService.get(
+      base: 'currentconditions',
+      endpoint: '$cityId',
+    );
 
-    return right(CurrentConditions.listFromJson(jsonDecode(currentConditions)).first);
+    if (httpResponse.statusCode == 200) {
+      final responseBody = jsonDecode(httpResponse.body);
+      await db.update(
+        table,
+        {'lastWeather': httpResponse.body},
+        where: 'id = $cityId',
+      );
+
+      return right(CurrentConditions.listFromJson(responseBody).first);
+    }
+
+    return left(BasicError.error(Exception()));
   }
 
   @override
   Future<Either<BasicError, FiveDays>> getFiveDays({required int cityId}) async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    final httpResponse = await networkService.get(
+      base: 'forecasts',
+      endpoint: 'daily/5day/$cityId',
+    );
 
-    return right(FiveDays.fromJson(jsonDecode(fiveDays)));
+    if (httpResponse.statusCode == 200) {
+      final responseBody = jsonDecode(httpResponse.body);
+      await db.update(
+        table,
+        {'fiveDays': httpResponse.body},
+        where: 'id = $cityId',
+      );
+
+      return right(FiveDays.fromJson(responseBody));
+    }
+    return left(BasicError.error(Exception()));
   }
 }
 

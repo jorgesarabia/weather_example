@@ -18,13 +18,11 @@ class _$WeatherStateTearOff {
 
   _WeatherState call(
       {required bool isLoading,
-      required CurrentConditions? currentConditions,
-      required FiveDays? fiveDays,
+      required BasicError basicError,
       required CityModel cityModel}) {
     return _WeatherState(
       isLoading: isLoading,
-      currentConditions: currentConditions,
-      fiveDays: fiveDays,
+      basicError: basicError,
       cityModel: cityModel,
     );
   }
@@ -36,9 +34,7 @@ const $WeatherState = _$WeatherStateTearOff();
 /// @nodoc
 mixin _$WeatherState {
   bool get isLoading => throw _privateConstructorUsedError;
-  CurrentConditions? get currentConditions =>
-      throw _privateConstructorUsedError;
-  FiveDays? get fiveDays => throw _privateConstructorUsedError;
+  BasicError get basicError => throw _privateConstructorUsedError;
   CityModel get cityModel => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -51,11 +47,7 @@ abstract class $WeatherStateCopyWith<$Res> {
   factory $WeatherStateCopyWith(
           WeatherState value, $Res Function(WeatherState) then) =
       _$WeatherStateCopyWithImpl<$Res>;
-  $Res call(
-      {bool isLoading,
-      CurrentConditions? currentConditions,
-      FiveDays? fiveDays,
-      CityModel cityModel});
+  $Res call({bool isLoading, BasicError basicError, CityModel cityModel});
 }
 
 /// @nodoc
@@ -69,8 +61,7 @@ class _$WeatherStateCopyWithImpl<$Res> implements $WeatherStateCopyWith<$Res> {
   @override
   $Res call({
     Object? isLoading = freezed,
-    Object? currentConditions = freezed,
-    Object? fiveDays = freezed,
+    Object? basicError = freezed,
     Object? cityModel = freezed,
   }) {
     return _then(_value.copyWith(
@@ -78,14 +69,10 @@ class _$WeatherStateCopyWithImpl<$Res> implements $WeatherStateCopyWith<$Res> {
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      currentConditions: currentConditions == freezed
-          ? _value.currentConditions
-          : currentConditions // ignore: cast_nullable_to_non_nullable
-              as CurrentConditions?,
-      fiveDays: fiveDays == freezed
-          ? _value.fiveDays
-          : fiveDays // ignore: cast_nullable_to_non_nullable
-              as FiveDays?,
+      basicError: basicError == freezed
+          ? _value.basicError
+          : basicError // ignore: cast_nullable_to_non_nullable
+              as BasicError,
       cityModel: cityModel == freezed
           ? _value.cityModel
           : cityModel // ignore: cast_nullable_to_non_nullable
@@ -101,11 +88,7 @@ abstract class _$WeatherStateCopyWith<$Res>
           _WeatherState value, $Res Function(_WeatherState) then) =
       __$WeatherStateCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {bool isLoading,
-      CurrentConditions? currentConditions,
-      FiveDays? fiveDays,
-      CityModel cityModel});
+  $Res call({bool isLoading, BasicError basicError, CityModel cityModel});
 }
 
 /// @nodoc
@@ -121,8 +104,7 @@ class __$WeatherStateCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = freezed,
-    Object? currentConditions = freezed,
-    Object? fiveDays = freezed,
+    Object? basicError = freezed,
     Object? cityModel = freezed,
   }) {
     return _then(_WeatherState(
@@ -130,14 +112,10 @@ class __$WeatherStateCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      currentConditions: currentConditions == freezed
-          ? _value.currentConditions
-          : currentConditions // ignore: cast_nullable_to_non_nullable
-              as CurrentConditions?,
-      fiveDays: fiveDays == freezed
-          ? _value.fiveDays
-          : fiveDays // ignore: cast_nullable_to_non_nullable
-              as FiveDays?,
+      basicError: basicError == freezed
+          ? _value.basicError
+          : basicError // ignore: cast_nullable_to_non_nullable
+              as BasicError,
       cityModel: cityModel == freezed
           ? _value.cityModel
           : cityModel // ignore: cast_nullable_to_non_nullable
@@ -151,22 +129,19 @@ class __$WeatherStateCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
 class _$_WeatherState implements _WeatherState {
   const _$_WeatherState(
       {required this.isLoading,
-      required this.currentConditions,
-      required this.fiveDays,
+      required this.basicError,
       required this.cityModel});
 
   @override
   final bool isLoading;
   @override
-  final CurrentConditions? currentConditions;
-  @override
-  final FiveDays? fiveDays;
+  final BasicError basicError;
   @override
   final CityModel cityModel;
 
   @override
   String toString() {
-    return 'WeatherState(isLoading: $isLoading, currentConditions: $currentConditions, fiveDays: $fiveDays, cityModel: $cityModel)';
+    return 'WeatherState(isLoading: $isLoading, basicError: $basicError, cityModel: $cityModel)';
   }
 
   @override
@@ -176,12 +151,9 @@ class _$_WeatherState implements _WeatherState {
             (identical(other.isLoading, isLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
-            (identical(other.currentConditions, currentConditions) ||
+            (identical(other.basicError, basicError) ||
                 const DeepCollectionEquality()
-                    .equals(other.currentConditions, currentConditions)) &&
-            (identical(other.fiveDays, fiveDays) ||
-                const DeepCollectionEquality()
-                    .equals(other.fiveDays, fiveDays)) &&
+                    .equals(other.basicError, basicError)) &&
             (identical(other.cityModel, cityModel) ||
                 const DeepCollectionEquality()
                     .equals(other.cityModel, cityModel)));
@@ -191,8 +163,7 @@ class _$_WeatherState implements _WeatherState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
-      const DeepCollectionEquality().hash(currentConditions) ^
-      const DeepCollectionEquality().hash(fiveDays) ^
+      const DeepCollectionEquality().hash(basicError) ^
       const DeepCollectionEquality().hash(cityModel);
 
   @JsonKey(ignore: true)
@@ -204,17 +175,13 @@ class _$_WeatherState implements _WeatherState {
 abstract class _WeatherState implements WeatherState {
   const factory _WeatherState(
       {required bool isLoading,
-      required CurrentConditions? currentConditions,
-      required FiveDays? fiveDays,
+      required BasicError basicError,
       required CityModel cityModel}) = _$_WeatherState;
 
   @override
   bool get isLoading => throw _privateConstructorUsedError;
   @override
-  CurrentConditions? get currentConditions =>
-      throw _privateConstructorUsedError;
-  @override
-  FiveDays? get fiveDays => throw _privateConstructorUsedError;
+  BasicError get basicError => throw _privateConstructorUsedError;
   @override
   CityModel get cityModel => throw _privateConstructorUsedError;
   @override
@@ -227,14 +194,8 @@ abstract class _WeatherState implements WeatherState {
 class _$WeatherEventTearOff {
   const _$WeatherEventTearOff();
 
-  _GetCurrentCondition getCurrentCondition(int cityKey) {
+  _GetCurrentCondition getCurrentConditionAndFiveDays(int cityKey) {
     return _GetCurrentCondition(
-      cityKey,
-    );
-  }
-
-  _GetFiveDaysCondition getFiveDays(int cityKey) {
-    return _GetFiveDaysCondition(
       cityKey,
     );
   }
@@ -253,30 +214,28 @@ const $WeatherEvent = _$WeatherEventTearOff();
 mixin _$WeatherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int cityKey) getCurrentCondition,
-    required TResult Function(int cityKey) getFiveDays,
+    required TResult Function(int cityKey) getCurrentConditionAndFiveDays,
     required TResult Function(CityModel city) setFromLocal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int cityKey)? getCurrentCondition,
-    TResult Function(int cityKey)? getFiveDays,
+    TResult Function(int cityKey)? getCurrentConditionAndFiveDays,
     TResult Function(CityModel city)? setFromLocal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetCurrentCondition value) getCurrentCondition,
-    required TResult Function(_GetFiveDaysCondition value) getFiveDays,
+    required TResult Function(_GetCurrentCondition value)
+        getCurrentConditionAndFiveDays,
     required TResult Function(_SetFromLocal value) setFromLocal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetCurrentCondition value)? getCurrentCondition,
-    TResult Function(_GetFiveDaysCondition value)? getFiveDays,
+    TResult Function(_GetCurrentCondition value)?
+        getCurrentConditionAndFiveDays,
     TResult Function(_SetFromLocal value)? setFromLocal,
     required TResult orElse(),
   }) =>
@@ -341,7 +300,7 @@ class _$_GetCurrentCondition implements _GetCurrentCondition {
 
   @override
   String toString() {
-    return 'WeatherEvent.getCurrentCondition(cityKey: $cityKey)';
+    return 'WeatherEvent.getCurrentConditionAndFiveDays(cityKey: $cityKey)';
   }
 
   @override
@@ -365,23 +324,21 @@ class _$_GetCurrentCondition implements _GetCurrentCondition {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int cityKey) getCurrentCondition,
-    required TResult Function(int cityKey) getFiveDays,
+    required TResult Function(int cityKey) getCurrentConditionAndFiveDays,
     required TResult Function(CityModel city) setFromLocal,
   }) {
-    return getCurrentCondition(cityKey);
+    return getCurrentConditionAndFiveDays(cityKey);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int cityKey)? getCurrentCondition,
-    TResult Function(int cityKey)? getFiveDays,
+    TResult Function(int cityKey)? getCurrentConditionAndFiveDays,
     TResult Function(CityModel city)? setFromLocal,
     required TResult orElse(),
   }) {
-    if (getCurrentCondition != null) {
-      return getCurrentCondition(cityKey);
+    if (getCurrentConditionAndFiveDays != null) {
+      return getCurrentConditionAndFiveDays(cityKey);
     }
     return orElse();
   }
@@ -389,23 +346,23 @@ class _$_GetCurrentCondition implements _GetCurrentCondition {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetCurrentCondition value) getCurrentCondition,
-    required TResult Function(_GetFiveDaysCondition value) getFiveDays,
+    required TResult Function(_GetCurrentCondition value)
+        getCurrentConditionAndFiveDays,
     required TResult Function(_SetFromLocal value) setFromLocal,
   }) {
-    return getCurrentCondition(this);
+    return getCurrentConditionAndFiveDays(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetCurrentCondition value)? getCurrentCondition,
-    TResult Function(_GetFiveDaysCondition value)? getFiveDays,
+    TResult Function(_GetCurrentCondition value)?
+        getCurrentConditionAndFiveDays,
     TResult Function(_SetFromLocal value)? setFromLocal,
     required TResult orElse(),
   }) {
-    if (getCurrentCondition != null) {
-      return getCurrentCondition(this);
+    if (getCurrentConditionAndFiveDays != null) {
+      return getCurrentConditionAndFiveDays(this);
     }
     return orElse();
   }
@@ -417,127 +374,6 @@ abstract class _GetCurrentCondition implements WeatherEvent {
   int get cityKey => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$GetCurrentConditionCopyWith<_GetCurrentCondition> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$GetFiveDaysConditionCopyWith<$Res> {
-  factory _$GetFiveDaysConditionCopyWith(_GetFiveDaysCondition value,
-          $Res Function(_GetFiveDaysCondition) then) =
-      __$GetFiveDaysConditionCopyWithImpl<$Res>;
-  $Res call({int cityKey});
-}
-
-/// @nodoc
-class __$GetFiveDaysConditionCopyWithImpl<$Res>
-    extends _$WeatherEventCopyWithImpl<$Res>
-    implements _$GetFiveDaysConditionCopyWith<$Res> {
-  __$GetFiveDaysConditionCopyWithImpl(
-      _GetFiveDaysCondition _value, $Res Function(_GetFiveDaysCondition) _then)
-      : super(_value, (v) => _then(v as _GetFiveDaysCondition));
-
-  @override
-  _GetFiveDaysCondition get _value => super._value as _GetFiveDaysCondition;
-
-  @override
-  $Res call({
-    Object? cityKey = freezed,
-  }) {
-    return _then(_GetFiveDaysCondition(
-      cityKey == freezed
-          ? _value.cityKey
-          : cityKey // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_GetFiveDaysCondition implements _GetFiveDaysCondition {
-  const _$_GetFiveDaysCondition(this.cityKey);
-
-  @override
-  final int cityKey;
-
-  @override
-  String toString() {
-    return 'WeatherEvent.getFiveDays(cityKey: $cityKey)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _GetFiveDaysCondition &&
-            (identical(other.cityKey, cityKey) ||
-                const DeepCollectionEquality().equals(other.cityKey, cityKey)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(cityKey);
-
-  @JsonKey(ignore: true)
-  @override
-  _$GetFiveDaysConditionCopyWith<_GetFiveDaysCondition> get copyWith =>
-      __$GetFiveDaysConditionCopyWithImpl<_GetFiveDaysCondition>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int cityKey) getCurrentCondition,
-    required TResult Function(int cityKey) getFiveDays,
-    required TResult Function(CityModel city) setFromLocal,
-  }) {
-    return getFiveDays(cityKey);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int cityKey)? getCurrentCondition,
-    TResult Function(int cityKey)? getFiveDays,
-    TResult Function(CityModel city)? setFromLocal,
-    required TResult orElse(),
-  }) {
-    if (getFiveDays != null) {
-      return getFiveDays(cityKey);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetCurrentCondition value) getCurrentCondition,
-    required TResult Function(_GetFiveDaysCondition value) getFiveDays,
-    required TResult Function(_SetFromLocal value) setFromLocal,
-  }) {
-    return getFiveDays(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetCurrentCondition value)? getCurrentCondition,
-    TResult Function(_GetFiveDaysCondition value)? getFiveDays,
-    TResult Function(_SetFromLocal value)? setFromLocal,
-    required TResult orElse(),
-  }) {
-    if (getFiveDays != null) {
-      return getFiveDays(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _GetFiveDaysCondition implements WeatherEvent {
-  const factory _GetFiveDaysCondition(int cityKey) = _$_GetFiveDaysCondition;
-
-  int get cityKey => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$GetFiveDaysConditionCopyWith<_GetFiveDaysCondition> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -605,8 +441,7 @@ class _$_SetFromLocal implements _SetFromLocal {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int cityKey) getCurrentCondition,
-    required TResult Function(int cityKey) getFiveDays,
+    required TResult Function(int cityKey) getCurrentConditionAndFiveDays,
     required TResult Function(CityModel city) setFromLocal,
   }) {
     return setFromLocal(city);
@@ -615,8 +450,7 @@ class _$_SetFromLocal implements _SetFromLocal {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int cityKey)? getCurrentCondition,
-    TResult Function(int cityKey)? getFiveDays,
+    TResult Function(int cityKey)? getCurrentConditionAndFiveDays,
     TResult Function(CityModel city)? setFromLocal,
     required TResult orElse(),
   }) {
@@ -629,8 +463,8 @@ class _$_SetFromLocal implements _SetFromLocal {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetCurrentCondition value) getCurrentCondition,
-    required TResult Function(_GetFiveDaysCondition value) getFiveDays,
+    required TResult Function(_GetCurrentCondition value)
+        getCurrentConditionAndFiveDays,
     required TResult Function(_SetFromLocal value) setFromLocal,
   }) {
     return setFromLocal(this);
@@ -639,8 +473,8 @@ class _$_SetFromLocal implements _SetFromLocal {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetCurrentCondition value)? getCurrentCondition,
-    TResult Function(_GetFiveDaysCondition value)? getFiveDays,
+    TResult Function(_GetCurrentCondition value)?
+        getCurrentConditionAndFiveDays,
     TResult Function(_SetFromLocal value)? setFromLocal,
     required TResult orElse(),
   }) {

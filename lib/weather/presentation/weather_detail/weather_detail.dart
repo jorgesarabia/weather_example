@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_example/app/injectable/injection.dart';
+import 'package:weather_example/app/presentation/common_snack_bar.dart';
 import 'package:weather_example/city/domain/city_model.dart';
 import 'package:weather_example/weather/application/weather_bloc.dart';
 import 'package:weather_example/weather/presentation/weather_detail/widgets/current_weather.dart';
@@ -20,35 +21,42 @@ class WeatherDetail extends StatelessWidget {
     return BlocProvider<WeatherBloc>(
       create: (_) {
         final bloc = getIt<WeatherBloc>();
-        bloc.add(WeatherEvent.getCurrentCondition(cityModel.id));
-        bloc.add(WeatherEvent.getFiveDays(cityModel.id));
+        bloc.add(WeatherEvent.setFromLocal(cityModel));
 
         return bloc;
       },
       child: BlocConsumer<WeatherBloc, WeatherState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state.basicError.somethingWentWrong) {
+            CommonSnackBar.of(context).danger(state.basicError.message);
+          }
+        },
         builder: (context, state) {
+          if (state.basicError.somethingWentWrong) {
+            return const Center(child: Text('Error getting data'));
+          }
+
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  if (state.currentConditions != null)
+                  if (state.cityModel.lastWeather != null)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 50.0),
                       child: CurrentWeather(
-                        cityModel: cityModel,
+                        cityModel: state.cityModel,
                       ),
                     ),
-                  if (state.fiveDays != null)
+                  if (state.cityModel.fiveDays != null)
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: List.generate(
-                          state.fiveDays!.dailyForecasts.length,
+                          state.cityModel.fiveDays!.dailyForecasts.length,
                           (index) {
-                            final daily = state.fiveDays!.dailyForecasts[index];
+                            final daily = state.cityModel.fiveDays!.dailyForecasts[index];
                             return DayCard(
                               date: _day(daily.epochDate),
                               icon: daily.day.icon.toString(),
