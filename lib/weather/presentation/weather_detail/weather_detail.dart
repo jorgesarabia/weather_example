@@ -5,6 +5,7 @@ import 'package:weather_example/app/injectable/injection.dart';
 import 'package:weather_example/app/presentation/common_snack_bar.dart';
 import 'package:weather_example/city/domain/city_model.dart';
 import 'package:weather_example/weather/application/weather_bloc.dart';
+import 'package:weather_example/weather/presentation/weather_day_detail/weather_day_detail_screen.dart';
 import 'package:weather_example/weather/presentation/weather_detail/widgets/current_weather.dart';
 import 'package:weather_example/weather/presentation/weather_detail/widgets/day_card.dart';
 
@@ -57,12 +58,26 @@ class WeatherDetail extends StatelessWidget {
                           state.cityModel.fiveDays!.dailyForecasts.length,
                           (index) {
                             final daily = state.cityModel.fiveDays!.dailyForecasts[index];
-                            return DayCard(
-                              date: _day(daily.epochDate),
-                              icon: daily.day.icon.toString(),
-                              iconPhase: daily.day.iconPhrase,
-                              maxTemperature: daily.temperature.maximum?.value.toString() ?? '',
-                              minTemperature: daily.temperature.minimum?.value.toString() ?? '',
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return WeatherDayDetailScreen(
+                                        dailyForecasts: daily,
+                                        city: state.cityModel,
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              child: DayCard(
+                                date: _day(daily.epochDate),
+                                icon: daily.day.icon.toString(),
+                                iconPhase: daily.day.iconPhrase,
+                                maxTemperature: daily.temperature.maximum?.value.toString() ?? '',
+                                minTemperature: daily.temperature.minimum?.value.toString() ?? '',
+                              ),
                             );
                           },
                         ),
