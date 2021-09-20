@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:weather_example/app/injectable/injection.dart';
 import 'package:weather_example/app/presentation/common_snack_bar.dart';
 import 'package:weather_example/city/domain/city_model.dart';
+import 'package:weather_example/city/presentation/my_cities/my_cities.dart';
 import 'package:weather_example/weather/application/weather_bloc.dart';
 import 'package:weather_example/weather/presentation/weather_day_detail/weather_day_detail_screen.dart';
 import 'package:weather_example/weather/presentation/weather_detail/widgets/current_weather.dart';
@@ -83,6 +84,41 @@ class WeatherDetail extends StatelessWidget {
                         ),
                       ),
                     ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 50.0,
+                      vertical: 20.0,
+                    ),
+                    child: TextButton(
+                      child: const Padding(
+                        padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                        child: Text(
+                          'View your cities',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.white.withOpacity(0.2),
+                        primary: Colors.grey,
+                        onSurface: Colors.yellow,
+                        side: const BorderSide(color: Colors.grey, width: 2),
+                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(25))),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) {
+                              return const MyCitiesScreen();
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
