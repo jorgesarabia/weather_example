@@ -5,6 +5,7 @@ class AddCityState with _$AddCityState {
   const factory AddCityState({
     required bool isLoading,
     required BasicError basicError,
+    required bool newCityWasAdded,
     required List<AutocompleteModel> listOfCities,
   }) = _AddCityState;
 
@@ -12,6 +13,7 @@ class AddCityState with _$AddCityState {
     return AddCityState(
       isLoading: false,
       basicError: BasicError.empty(),
+      newCityWasAdded: false,
       listOfCities: [],
     );
   }

@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
           ),
           BlocConsumer<CitiesBloc, CitiesState>(
             listener: (context, state) {
-              if (!state.hasDefaultCity) {
+              if (!state.hasDefaultCity && !state.isLoading) {
                 CommonSnackBar.of(context).warning('You don\'t have any city in your list\nPlease add one!');
                 final addCity = Navigator.of(context).push(
                   MaterialPageRoute(

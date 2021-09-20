@@ -34,6 +34,10 @@ class AddCityScreen extends StatelessWidget {
                 if (state.basicError.somethingWentWrong) {
                   CommonSnackBar.of(context).danger(state.basicError.message);
                 }
+
+                if (state.newCityWasAdded) {
+                  Navigator.of(context).pop();
+                }
               },
               child: SingleChildScrollView(
                 child: Padding(

@@ -19,10 +19,12 @@ class _$AddCityStateTearOff {
   _AddCityState call(
       {required bool isLoading,
       required BasicError basicError,
+      required bool newCityWasAdded,
       required List<AutocompleteModel> listOfCities}) {
     return _AddCityState(
       isLoading: isLoading,
       basicError: basicError,
+      newCityWasAdded: newCityWasAdded,
       listOfCities: listOfCities,
     );
   }
@@ -35,6 +37,7 @@ const $AddCityState = _$AddCityStateTearOff();
 mixin _$AddCityState {
   bool get isLoading => throw _privateConstructorUsedError;
   BasicError get basicError => throw _privateConstructorUsedError;
+  bool get newCityWasAdded => throw _privateConstructorUsedError;
   List<AutocompleteModel> get listOfCities =>
       throw _privateConstructorUsedError;
 
@@ -51,6 +54,7 @@ abstract class $AddCityStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       BasicError basicError,
+      bool newCityWasAdded,
       List<AutocompleteModel> listOfCities});
 }
 
@@ -66,6 +70,7 @@ class _$AddCityStateCopyWithImpl<$Res> implements $AddCityStateCopyWith<$Res> {
   $Res call({
     Object? isLoading = freezed,
     Object? basicError = freezed,
+    Object? newCityWasAdded = freezed,
     Object? listOfCities = freezed,
   }) {
     return _then(_value.copyWith(
@@ -77,6 +82,10 @@ class _$AddCityStateCopyWithImpl<$Res> implements $AddCityStateCopyWith<$Res> {
           ? _value.basicError
           : basicError // ignore: cast_nullable_to_non_nullable
               as BasicError,
+      newCityWasAdded: newCityWasAdded == freezed
+          ? _value.newCityWasAdded
+          : newCityWasAdded // ignore: cast_nullable_to_non_nullable
+              as bool,
       listOfCities: listOfCities == freezed
           ? _value.listOfCities
           : listOfCities // ignore: cast_nullable_to_non_nullable
@@ -95,6 +104,7 @@ abstract class _$AddCityStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       BasicError basicError,
+      bool newCityWasAdded,
       List<AutocompleteModel> listOfCities});
 }
 
@@ -112,6 +122,7 @@ class __$AddCityStateCopyWithImpl<$Res> extends _$AddCityStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = freezed,
     Object? basicError = freezed,
+    Object? newCityWasAdded = freezed,
     Object? listOfCities = freezed,
   }) {
     return _then(_AddCityState(
@@ -123,6 +134,10 @@ class __$AddCityStateCopyWithImpl<$Res> extends _$AddCityStateCopyWithImpl<$Res>
           ? _value.basicError
           : basicError // ignore: cast_nullable_to_non_nullable
               as BasicError,
+      newCityWasAdded: newCityWasAdded == freezed
+          ? _value.newCityWasAdded
+          : newCityWasAdded // ignore: cast_nullable_to_non_nullable
+              as bool,
       listOfCities: listOfCities == freezed
           ? _value.listOfCities
           : listOfCities // ignore: cast_nullable_to_non_nullable
@@ -137,6 +152,7 @@ class _$_AddCityState with DiagnosticableTreeMixin implements _AddCityState {
   const _$_AddCityState(
       {required this.isLoading,
       required this.basicError,
+      required this.newCityWasAdded,
       required this.listOfCities});
 
   @override
@@ -144,11 +160,13 @@ class _$_AddCityState with DiagnosticableTreeMixin implements _AddCityState {
   @override
   final BasicError basicError;
   @override
+  final bool newCityWasAdded;
+  @override
   final List<AutocompleteModel> listOfCities;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AddCityState(isLoading: $isLoading, basicError: $basicError, listOfCities: $listOfCities)';
+    return 'AddCityState(isLoading: $isLoading, basicError: $basicError, newCityWasAdded: $newCityWasAdded, listOfCities: $listOfCities)';
   }
 
   @override
@@ -158,6 +176,7 @@ class _$_AddCityState with DiagnosticableTreeMixin implements _AddCityState {
       ..add(DiagnosticsProperty('type', 'AddCityState'))
       ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('basicError', basicError))
+      ..add(DiagnosticsProperty('newCityWasAdded', newCityWasAdded))
       ..add(DiagnosticsProperty('listOfCities', listOfCities));
   }
 
@@ -171,6 +190,9 @@ class _$_AddCityState with DiagnosticableTreeMixin implements _AddCityState {
             (identical(other.basicError, basicError) ||
                 const DeepCollectionEquality()
                     .equals(other.basicError, basicError)) &&
+            (identical(other.newCityWasAdded, newCityWasAdded) ||
+                const DeepCollectionEquality()
+                    .equals(other.newCityWasAdded, newCityWasAdded)) &&
             (identical(other.listOfCities, listOfCities) ||
                 const DeepCollectionEquality()
                     .equals(other.listOfCities, listOfCities)));
@@ -181,6 +203,7 @@ class _$_AddCityState with DiagnosticableTreeMixin implements _AddCityState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(basicError) ^
+      const DeepCollectionEquality().hash(newCityWasAdded) ^
       const DeepCollectionEquality().hash(listOfCities);
 
   @JsonKey(ignore: true)
@@ -193,12 +216,15 @@ abstract class _AddCityState implements AddCityState {
   const factory _AddCityState(
       {required bool isLoading,
       required BasicError basicError,
+      required bool newCityWasAdded,
       required List<AutocompleteModel> listOfCities}) = _$_AddCityState;
 
   @override
   bool get isLoading => throw _privateConstructorUsedError;
   @override
   BasicError get basicError => throw _privateConstructorUsedError;
+  @override
+  bool get newCityWasAdded => throw _privateConstructorUsedError;
   @override
   List<AutocompleteModel> get listOfCities =>
       throw _privateConstructorUsedError;

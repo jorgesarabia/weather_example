@@ -28,13 +28,15 @@ class CityRepository implements ICityFacade {
     required bool isDefault,
   }) async {
     int savedCity = 0;
+    final now = DateTime.now();
+    final defaultDate = DateTime(now.year, now.month - 1, now.day);
     try {
       savedCity = await db.insert(table, {
         'id': city.key,
         'autocompleteModel': jsonEncode(city.toJson()),
         'isDefault': isDefault,
         'lastWeather': '',
-        'lastMeasure': '',
+        'lastMeasure': defaultDate.millisecondsSinceEpoch,
       });
     } on PlatformException catch (e) {
       return left(BasicError.error(e));
@@ -63,7 +65,7 @@ class CityRepository implements ICityFacade {
 
   @override
   Future<Option<CityModel>> getDefaultCity() async {
-    final myDefaultQuery = await db.query(table, where: 'isDefault = true');
+    final myDefaultQuery = await db.query(table, where: 'isDefault = 1');
     List<CityModel> values = CityModel.listFromJson(myDefaultQuery);
 
     if (values.isEmpty) {
