@@ -26,13 +26,17 @@ class WeatherRepository implements IWeatherFacade {
     final httpResponse = await networkService.get(
       base: 'currentconditions',
       endpoint: '$cityId',
+      params: 'details=true&metric=true',
     );
 
     if (httpResponse.statusCode == 200) {
       final responseBody = jsonDecode(httpResponse.body);
       await db.update(
         table,
-        {'lastWeather': httpResponse.body},
+        {
+          'lastWeather': httpResponse.body,
+          'lastMeasureSinceEpoch': DateTime.now().millisecondsSinceEpoch,
+        },
         where: 'id = $cityId',
       );
 
@@ -47,13 +51,17 @@ class WeatherRepository implements IWeatherFacade {
     final httpResponse = await networkService.get(
       base: 'forecasts',
       endpoint: 'daily/5day/$cityId',
+      params: 'details=true&metric=true',
     );
 
     if (httpResponse.statusCode == 200) {
       final responseBody = jsonDecode(httpResponse.body);
       await db.update(
         table,
-        {'fiveDays': httpResponse.body},
+        {
+          'fiveDays': httpResponse.body,
+          'lastMeasureSinceEpoch': DateTime.now().millisecondsSinceEpoch,
+        },
         where: 'id = $cityId',
       );
 

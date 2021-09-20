@@ -24,18 +24,20 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   }
 
   Stream<WeatherState> _mapSetFromLocalEventToState(_SetFromLocal event) async* {
-    yield state.copyWith(isLoading: true);
-
     final currentCity = event.city;
 
     final measuredTime = currentCity.lastMeasureSinceEpoch;
     final now = DateTime.now();
     final diff = now.subtract(const Duration(hours: 12)).millisecondsSinceEpoch;
 
-    if (measuredTime < diff || currentCity.fiveDays != null || currentCity.lastWeather != null) {
+    final isMoreThanTwelve = measuredTime < diff;
+    final hasNotFiveDays = currentCity.fiveDays == null;
+    final hasNotLastWeather = currentCity.lastWeather == null;
+
+    if (isMoreThanTwelve || hasNotFiveDays || hasNotLastWeather) {
       add(WeatherEvent.getCurrentConditionAndFiveDays(currentCity.id));
     } else {
-      state.copyWith(
+      yield state.copyWith(
         isLoading: false,
         cityModel: currentCity,
       );
