@@ -4,7 +4,7 @@ import 'package:weather_example/city/domain/city_model.dart';
 import 'package:weather_example/weather/domain/daily_forecast.dart';
 import 'package:weather_example/weather/presentation/weather_day_detail/widgets/weather_day_app_bar.dart';
 import 'package:weather_example/weather/presentation/weather_day_detail/widgets/weather_day_body.dart';
-import 'package:weather_example/weather/presentation/weather_day_detail/widgets/weather_day_temperatures.dart';
+import 'package:weather_example/weather/presentation/weather_day_detail/widgets/weather_temperature_detail.dart';
 
 class WeatherDayDetailScreen extends StatelessWidget {
   const WeatherDayDetailScreen({
@@ -32,11 +32,13 @@ class WeatherDayDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            children: [
-              WeatherDayAppBar(title: headerTitle),
-              WeatherDayBody(dailyForecasts: dailyForecasts),
-            ],
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                WeatherDayAppBar(title: headerTitle),
+                WeatherDayBody(dailyForecasts: dailyForecasts),
+              ],
+            ),
           ),
         ],
       ),

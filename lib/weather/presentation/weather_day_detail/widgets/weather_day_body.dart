@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_example/weather/domain/daily_forecast.dart';
-import 'package:weather_example/weather/presentation/weather_day_detail/widgets/weather_day_temperatures.dart';
+import 'package:weather_example/weather/presentation/weather_day_detail/widgets/weather_day_detail.dart';
 import 'package:weather_example/weather/presentation/weather_day_detail/widgets/weather_temeprature.dart';
 
 class WeatherDayBody extends StatelessWidget {
@@ -21,12 +21,12 @@ class WeatherDayBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          WeatherDayTemeperature(
-            icon: dailyForecasts.day.icon.toString(),
-            phrase: dailyForecasts.day.longPhrase,
-          ),
-          const _Divider(),
           WeatherTemperature(dailyForecasts: dailyForecasts),
+          const _Divider(),
+          WeatherDayDetail.day(dailyForecasts: dailyForecasts),
+          const _Divider(),
+          WeatherDayDetail.night(dailyForecasts: dailyForecasts),
+          const _Divider(),
         ],
       ),
     );

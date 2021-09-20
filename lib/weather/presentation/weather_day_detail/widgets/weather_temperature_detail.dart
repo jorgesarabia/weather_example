@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class WeatherDayTemeperature extends StatelessWidget {
-  const WeatherDayTemeperature({
+class WeatherTemeperatureDetail extends StatelessWidget {
+  const WeatherTemeperatureDetail({
     Key? key,
     required this.icon,
     required this.phrase,
