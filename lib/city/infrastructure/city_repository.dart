@@ -38,6 +38,10 @@ class CityRepository implements ICityFacade {
         'lastWeather': '',
         'lastMeasure': defaultDate.millisecondsSinceEpoch,
       });
+
+      if (savedCity != 0) {
+        await db.update(table, {'isDefault': false}, where: 'id != ${city.key}');
+      }
     } on PlatformException catch (e) {
       return left(BasicError.error(e));
     } on Exception catch (e) {
@@ -54,7 +58,6 @@ class CityRepository implements ICityFacade {
       params: 'q=$q',
     );
     if (httpResponse.statusCode == 200) {
-      // final cities = <AutocompleteModel>[];
       final responseBody = jsonDecode(httpResponse.body);
 
       return AutocompleteModel.listFromJson(responseBody);

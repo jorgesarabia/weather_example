@@ -34,7 +34,7 @@ class CityModel {
     return CityModel(
       id: json['id'],
       city: AutocompleteModel.fromJson(jsonDecode(json['autocompleteModel'])),
-      isDefault: json['isDefaul'] == 1,
+      isDefault: json['isDefault'] == 1,
       lastWeather: json['lastWeather'],
       lastMeasure: json['lastMeasure'],
     );
