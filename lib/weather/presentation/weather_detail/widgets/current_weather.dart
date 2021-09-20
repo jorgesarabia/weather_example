@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_example/city/domain/city_model.dart';
+import 'package:weather_example/weather/application/weather_bloc.dart';
 
 class CurrentWeather extends StatelessWidget {
   const CurrentWeather({
@@ -36,7 +39,7 @@ class CurrentWeather extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  cityModel.lastWeather!.measuredWhen,
+                  dateFormater(DateTime.now().millisecondsSinceEpoch),
                   style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 15.0,
@@ -66,8 +69,33 @@ class CurrentWeather extends StatelessWidget {
             ],
           ),
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Updated at ${dateFormater(cityModel.lastMeasureSinceEpoch)}',
+              style: const TextStyle(
+                color: Colors.grey,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                BlocProvider.of<WeatherBloc>(context).add(WeatherEvent.getCurrentConditionAndFiveDays(cityModel.id));
+              },
+              icon: const Icon(
+                Icons.sync,
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ),
       ],
     );
+  }
+
+  String dateFormater(int epoch) {
+    final date = DateTime.fromMillisecondsSinceEpoch(epoch);
+    return DateFormat.yMMMd().add_jm().format(date);
   }
 }
 

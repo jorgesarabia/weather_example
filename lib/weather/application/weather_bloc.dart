@@ -82,6 +82,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     yield* answer.fold(
       (l) async* {
         currentCity.lastWeather = null;
+        currentCity.lastMeasureSinceEpoch = DateTime.now().millisecondsSinceEpoch;
 
         yield state.copyWith(
           isLoading: false,
@@ -91,6 +92,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       },
       (r) async* {
         currentCity.lastWeather = r;
+        currentCity.lastMeasureSinceEpoch = DateTime.now().millisecondsSinceEpoch;
 
         yield state.copyWith(
           isLoading: false,
