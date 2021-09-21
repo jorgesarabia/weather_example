@@ -4,8 +4,8 @@ class Headline {
   int severity;
   String text;
   String category;
-  String endDate;
-  int endEpochDate;
+  String? endDate;
+  int? endEpochDate;
   String mobileLink;
   String link;
 
