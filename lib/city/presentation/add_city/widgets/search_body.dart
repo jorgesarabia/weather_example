@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_example/city/application/add_city/add_city_bloc.dart';
 import 'package:weather_example/city/presentation/common/city_card.dart';
-import 'package:weather_example/weather/domain/administrative_area.dart';
-import 'package:weather_example/weather/domain/autocomplete_model.dart';
-import 'package:weather_example/weather/domain/country.dart';
 
 class SearchBody extends StatelessWidget {
   const SearchBody({Key? key}) : super(key: key);
