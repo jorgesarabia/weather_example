@@ -35,6 +35,10 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     final hasNotLastWeather = currentCity.lastWeather == null;
 
     if (isMoreThanTwelve || hasNotFiveDays || hasNotLastWeather) {
+      yield state.copyWith(
+        isLoading: true,
+        cityModel: currentCity,
+      );
       add(WeatherEvent.getCurrentConditionAndFiveDays(currentCity.id));
     } else {
       yield state.copyWith(

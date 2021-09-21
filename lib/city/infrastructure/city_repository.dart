@@ -40,15 +40,17 @@ class CityRepository implements ICityFacade {
         'lastMeasureSinceEpoch': defaultDate.millisecondsSinceEpoch,
       });
 
-      if (savedCity != 0) {
+      if (savedCity != 0 && isDefault) {
         await db.update(table, {'isDefault': false}, where: 'id != ${city.key}');
-      } else {
-        return left(BasicError.error(Exception('Can not save the city')));
       }
     } on PlatformException catch (e) {
       return left(BasicError.error(e));
     } on Exception catch (e) {
       return left(BasicError.error(e));
+    }
+
+    if (savedCity == 0) {
+      return left(BasicError.error(Exception('Can not save the city')));
     }
 
     return right(true);

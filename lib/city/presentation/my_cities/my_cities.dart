@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_example/app/presentation/common_app_bar.dart';
 import 'package:weather_example/city/application/cities_bloc/cities_bloc.dart';
 import 'package:weather_example/city/presentation/add_city/add_city_screen.dart';
-import 'package:weather_example/city/presentation/my_cities/widgets/list_app_bar.dart';
 import 'package:weather_example/city/presentation/my_cities/widgets/list_of_cities.dart';
 
 class MyCitiesScreen extends StatefulWidget {
@@ -42,7 +42,7 @@ class _MyCitiesScreenState extends State<MyCitiesScreen> {
                   children: [
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 15),
-                      child: ListAppBar(),
+                      child: CommonAppBar(title: 'My Cities'),
                     ),
                     ListOfCities(cities: state.myCities),
                     Padding(
