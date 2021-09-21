@@ -10,4 +10,6 @@ abstract class ICityFacade {
     required bool isDefault,
   });
   Future<Option<CityModel>> getDefaultCity();
+
+  Future<List<CityModel>> getCities();
 }

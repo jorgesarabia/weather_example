@@ -19,11 +19,13 @@ class _$CitiesStateTearOff {
   _CitiesState call(
       {required bool isLoading,
       required bool hasDefaultCity,
-      required CityModel defaultCity}) {
+      required CityModel defaultCity,
+      required List<CityModel> myCities}) {
     return _CitiesState(
       isLoading: isLoading,
       hasDefaultCity: hasDefaultCity,
       defaultCity: defaultCity,
+      myCities: myCities,
     );
   }
 }
@@ -36,6 +38,7 @@ mixin _$CitiesState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get hasDefaultCity => throw _privateConstructorUsedError;
   CityModel get defaultCity => throw _privateConstructorUsedError;
+  List<CityModel> get myCities => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CitiesStateCopyWith<CitiesState> get copyWith =>
@@ -47,7 +50,11 @@ abstract class $CitiesStateCopyWith<$Res> {
   factory $CitiesStateCopyWith(
           CitiesState value, $Res Function(CitiesState) then) =
       _$CitiesStateCopyWithImpl<$Res>;
-  $Res call({bool isLoading, bool hasDefaultCity, CityModel defaultCity});
+  $Res call(
+      {bool isLoading,
+      bool hasDefaultCity,
+      CityModel defaultCity,
+      List<CityModel> myCities});
 }
 
 /// @nodoc
@@ -63,6 +70,7 @@ class _$CitiesStateCopyWithImpl<$Res> implements $CitiesStateCopyWith<$Res> {
     Object? isLoading = freezed,
     Object? hasDefaultCity = freezed,
     Object? defaultCity = freezed,
+    Object? myCities = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed
@@ -77,6 +85,10 @@ class _$CitiesStateCopyWithImpl<$Res> implements $CitiesStateCopyWith<$Res> {
           ? _value.defaultCity
           : defaultCity // ignore: cast_nullable_to_non_nullable
               as CityModel,
+      myCities: myCities == freezed
+          ? _value.myCities
+          : myCities // ignore: cast_nullable_to_non_nullable
+              as List<CityModel>,
     ));
   }
 }
@@ -88,7 +100,11 @@ abstract class _$CitiesStateCopyWith<$Res>
           _CitiesState value, $Res Function(_CitiesState) then) =
       __$CitiesStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool isLoading, bool hasDefaultCity, CityModel defaultCity});
+  $Res call(
+      {bool isLoading,
+      bool hasDefaultCity,
+      CityModel defaultCity,
+      List<CityModel> myCities});
 }
 
 /// @nodoc
@@ -106,6 +122,7 @@ class __$CitiesStateCopyWithImpl<$Res> extends _$CitiesStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? hasDefaultCity = freezed,
     Object? defaultCity = freezed,
+    Object? myCities = freezed,
   }) {
     return _then(_CitiesState(
       isLoading: isLoading == freezed
@@ -120,6 +137,10 @@ class __$CitiesStateCopyWithImpl<$Res> extends _$CitiesStateCopyWithImpl<$Res>
           ? _value.defaultCity
           : defaultCity // ignore: cast_nullable_to_non_nullable
               as CityModel,
+      myCities: myCities == freezed
+          ? _value.myCities
+          : myCities // ignore: cast_nullable_to_non_nullable
+              as List<CityModel>,
     ));
   }
 }
@@ -130,7 +151,8 @@ class _$_CitiesState implements _CitiesState {
   const _$_CitiesState(
       {required this.isLoading,
       required this.hasDefaultCity,
-      required this.defaultCity});
+      required this.defaultCity,
+      required this.myCities});
 
   @override
   final bool isLoading;
@@ -138,10 +160,12 @@ class _$_CitiesState implements _CitiesState {
   final bool hasDefaultCity;
   @override
   final CityModel defaultCity;
+  @override
+  final List<CityModel> myCities;
 
   @override
   String toString() {
-    return 'CitiesState(isLoading: $isLoading, hasDefaultCity: $hasDefaultCity, defaultCity: $defaultCity)';
+    return 'CitiesState(isLoading: $isLoading, hasDefaultCity: $hasDefaultCity, defaultCity: $defaultCity, myCities: $myCities)';
   }
 
   @override
@@ -156,7 +180,10 @@ class _$_CitiesState implements _CitiesState {
                     .equals(other.hasDefaultCity, hasDefaultCity)) &&
             (identical(other.defaultCity, defaultCity) ||
                 const DeepCollectionEquality()
-                    .equals(other.defaultCity, defaultCity)));
+                    .equals(other.defaultCity, defaultCity)) &&
+            (identical(other.myCities, myCities) ||
+                const DeepCollectionEquality()
+                    .equals(other.myCities, myCities)));
   }
 
   @override
@@ -164,7 +191,8 @@ class _$_CitiesState implements _CitiesState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(hasDefaultCity) ^
-      const DeepCollectionEquality().hash(defaultCity);
+      const DeepCollectionEquality().hash(defaultCity) ^
+      const DeepCollectionEquality().hash(myCities);
 
   @JsonKey(ignore: true)
   @override
@@ -176,7 +204,8 @@ abstract class _CitiesState implements CitiesState {
   const factory _CitiesState(
       {required bool isLoading,
       required bool hasDefaultCity,
-      required CityModel defaultCity}) = _$_CitiesState;
+      required CityModel defaultCity,
+      required List<CityModel> myCities}) = _$_CitiesState;
 
   @override
   bool get isLoading => throw _privateConstructorUsedError;
@@ -184,6 +213,8 @@ abstract class _CitiesState implements CitiesState {
   bool get hasDefaultCity => throw _privateConstructorUsedError;
   @override
   CityModel get defaultCity => throw _privateConstructorUsedError;
+  @override
+  List<CityModel> get myCities => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CitiesStateCopyWith<_CitiesState> get copyWith =>
@@ -197,6 +228,10 @@ class _$CitiesEventTearOff {
   _GetDefaultCity getDefaultCity() {
     return const _GetDefaultCity();
   }
+
+  _GetListOfCities getListOfCities() {
+    return const _GetListOfCities();
+  }
 }
 
 /// @nodoc
@@ -207,22 +242,26 @@ mixin _$CitiesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getDefaultCity,
+    required TResult Function() getListOfCities,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getDefaultCity,
+    TResult Function()? getListOfCities,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetDefaultCity value) getDefaultCity,
+    required TResult Function(_GetListOfCities value) getListOfCities,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetDefaultCity value)? getDefaultCity,
+    TResult Function(_GetListOfCities value)? getListOfCities,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -285,6 +324,7 @@ class _$_GetDefaultCity implements _GetDefaultCity {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getDefaultCity,
+    required TResult Function() getListOfCities,
   }) {
     return getDefaultCity();
   }
@@ -293,6 +333,7 @@ class _$_GetDefaultCity implements _GetDefaultCity {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getDefaultCity,
+    TResult Function()? getListOfCities,
     required TResult orElse(),
   }) {
     if (getDefaultCity != null) {
@@ -305,6 +346,7 @@ class _$_GetDefaultCity implements _GetDefaultCity {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetDefaultCity value) getDefaultCity,
+    required TResult Function(_GetListOfCities value) getListOfCities,
   }) {
     return getDefaultCity(this);
   }
@@ -313,6 +355,7 @@ class _$_GetDefaultCity implements _GetDefaultCity {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetDefaultCity value)? getDefaultCity,
+    TResult Function(_GetListOfCities value)? getListOfCities,
     required TResult orElse(),
   }) {
     if (getDefaultCity != null) {
@@ -324,4 +367,90 @@ class _$_GetDefaultCity implements _GetDefaultCity {
 
 abstract class _GetDefaultCity implements CitiesEvent {
   const factory _GetDefaultCity() = _$_GetDefaultCity;
+}
+
+/// @nodoc
+abstract class _$GetListOfCitiesCopyWith<$Res> {
+  factory _$GetListOfCitiesCopyWith(
+          _GetListOfCities value, $Res Function(_GetListOfCities) then) =
+      __$GetListOfCitiesCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$GetListOfCitiesCopyWithImpl<$Res>
+    extends _$CitiesEventCopyWithImpl<$Res>
+    implements _$GetListOfCitiesCopyWith<$Res> {
+  __$GetListOfCitiesCopyWithImpl(
+      _GetListOfCities _value, $Res Function(_GetListOfCities) _then)
+      : super(_value, (v) => _then(v as _GetListOfCities));
+
+  @override
+  _GetListOfCities get _value => super._value as _GetListOfCities;
+}
+
+/// @nodoc
+
+class _$_GetListOfCities implements _GetListOfCities {
+  const _$_GetListOfCities();
+
+  @override
+  String toString() {
+    return 'CitiesEvent.getListOfCities()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _GetListOfCities);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getDefaultCity,
+    required TResult Function() getListOfCities,
+  }) {
+    return getListOfCities();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getDefaultCity,
+    TResult Function()? getListOfCities,
+    required TResult orElse(),
+  }) {
+    if (getListOfCities != null) {
+      return getListOfCities();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetDefaultCity value) getDefaultCity,
+    required TResult Function(_GetListOfCities value) getListOfCities,
+  }) {
+    return getListOfCities(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetDefaultCity value)? getDefaultCity,
+    TResult Function(_GetListOfCities value)? getListOfCities,
+    required TResult orElse(),
+  }) {
+    if (getListOfCities != null) {
+      return getListOfCities(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetListOfCities implements CitiesEvent {
+  const factory _GetListOfCities() = _$_GetListOfCities;
 }

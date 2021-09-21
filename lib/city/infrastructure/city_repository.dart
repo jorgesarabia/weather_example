@@ -86,4 +86,11 @@ class CityRepository implements ICityFacade {
 
     return optionOf(values.first);
   }
+
+  @override
+  Future<List<CityModel>> getCities() async {
+    final cities = await db.query(table);
+
+    return CityModel.listFromJson(cities);
+  }
 }

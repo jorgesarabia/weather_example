@@ -6,6 +6,7 @@ class CitiesState with _$CitiesState {
     required bool isLoading,
     required bool hasDefaultCity,
     required CityModel defaultCity,
+    required List<CityModel> myCities,
   }) = _CitiesState;
 
   factory CitiesState.initial() {
@@ -13,6 +14,7 @@ class CitiesState with _$CitiesState {
       isLoading: false,
       hasDefaultCity: false,
       defaultCity: CityModel.empty(),
+      myCities: [],
     );
   }
 }

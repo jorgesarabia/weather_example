@@ -18,6 +18,18 @@ class CitiesBloc extends Bloc<CitiesEvent, CitiesState> {
   Stream<CitiesState> mapEventToState(CitiesEvent event) async* {
     yield* event.map(
       getDefaultCity: _mapAppIsStartingEventToState,
+      getListOfCities: _mapGetListOfCitiesEventToState,
+    );
+  }
+
+  Stream<CitiesState> _mapGetListOfCitiesEventToState(_GetListOfCities event) async* {
+    yield state.copyWith(isLoading: true);
+
+    final cities = await iCityFacade.getCities();
+
+    yield state.copyWith(
+      isLoading: false,
+      myCities: cities,
     );
   }
 
