@@ -20,11 +20,13 @@ class _$AddCityStateTearOff {
       {required bool isLoading,
       required BasicError basicError,
       required bool newCityWasAdded,
+      required bool wasAddedAsDefault,
       required List<AutocompleteModel> listOfCities}) {
     return _AddCityState(
       isLoading: isLoading,
       basicError: basicError,
       newCityWasAdded: newCityWasAdded,
+      wasAddedAsDefault: wasAddedAsDefault,
       listOfCities: listOfCities,
     );
   }
@@ -38,6 +40,7 @@ mixin _$AddCityState {
   bool get isLoading => throw _privateConstructorUsedError;
   BasicError get basicError => throw _privateConstructorUsedError;
   bool get newCityWasAdded => throw _privateConstructorUsedError;
+  bool get wasAddedAsDefault => throw _privateConstructorUsedError;
   List<AutocompleteModel> get listOfCities =>
       throw _privateConstructorUsedError;
 
@@ -55,6 +58,7 @@ abstract class $AddCityStateCopyWith<$Res> {
       {bool isLoading,
       BasicError basicError,
       bool newCityWasAdded,
+      bool wasAddedAsDefault,
       List<AutocompleteModel> listOfCities});
 }
 
@@ -71,6 +75,7 @@ class _$AddCityStateCopyWithImpl<$Res> implements $AddCityStateCopyWith<$Res> {
     Object? isLoading = freezed,
     Object? basicError = freezed,
     Object? newCityWasAdded = freezed,
+    Object? wasAddedAsDefault = freezed,
     Object? listOfCities = freezed,
   }) {
     return _then(_value.copyWith(
@@ -85,6 +90,10 @@ class _$AddCityStateCopyWithImpl<$Res> implements $AddCityStateCopyWith<$Res> {
       newCityWasAdded: newCityWasAdded == freezed
           ? _value.newCityWasAdded
           : newCityWasAdded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      wasAddedAsDefault: wasAddedAsDefault == freezed
+          ? _value.wasAddedAsDefault
+          : wasAddedAsDefault // ignore: cast_nullable_to_non_nullable
               as bool,
       listOfCities: listOfCities == freezed
           ? _value.listOfCities
@@ -105,6 +114,7 @@ abstract class _$AddCityStateCopyWith<$Res>
       {bool isLoading,
       BasicError basicError,
       bool newCityWasAdded,
+      bool wasAddedAsDefault,
       List<AutocompleteModel> listOfCities});
 }
 
@@ -123,6 +133,7 @@ class __$AddCityStateCopyWithImpl<$Res> extends _$AddCityStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? basicError = freezed,
     Object? newCityWasAdded = freezed,
+    Object? wasAddedAsDefault = freezed,
     Object? listOfCities = freezed,
   }) {
     return _then(_AddCityState(
@@ -137,6 +148,10 @@ class __$AddCityStateCopyWithImpl<$Res> extends _$AddCityStateCopyWithImpl<$Res>
       newCityWasAdded: newCityWasAdded == freezed
           ? _value.newCityWasAdded
           : newCityWasAdded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      wasAddedAsDefault: wasAddedAsDefault == freezed
+          ? _value.wasAddedAsDefault
+          : wasAddedAsDefault // ignore: cast_nullable_to_non_nullable
               as bool,
       listOfCities: listOfCities == freezed
           ? _value.listOfCities
@@ -153,6 +168,7 @@ class _$_AddCityState with DiagnosticableTreeMixin implements _AddCityState {
       {required this.isLoading,
       required this.basicError,
       required this.newCityWasAdded,
+      required this.wasAddedAsDefault,
       required this.listOfCities});
 
   @override
@@ -162,11 +178,13 @@ class _$_AddCityState with DiagnosticableTreeMixin implements _AddCityState {
   @override
   final bool newCityWasAdded;
   @override
+  final bool wasAddedAsDefault;
+  @override
   final List<AutocompleteModel> listOfCities;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AddCityState(isLoading: $isLoading, basicError: $basicError, newCityWasAdded: $newCityWasAdded, listOfCities: $listOfCities)';
+    return 'AddCityState(isLoading: $isLoading, basicError: $basicError, newCityWasAdded: $newCityWasAdded, wasAddedAsDefault: $wasAddedAsDefault, listOfCities: $listOfCities)';
   }
 
   @override
@@ -177,6 +195,7 @@ class _$_AddCityState with DiagnosticableTreeMixin implements _AddCityState {
       ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('basicError', basicError))
       ..add(DiagnosticsProperty('newCityWasAdded', newCityWasAdded))
+      ..add(DiagnosticsProperty('wasAddedAsDefault', wasAddedAsDefault))
       ..add(DiagnosticsProperty('listOfCities', listOfCities));
   }
 
@@ -193,6 +212,9 @@ class _$_AddCityState with DiagnosticableTreeMixin implements _AddCityState {
             (identical(other.newCityWasAdded, newCityWasAdded) ||
                 const DeepCollectionEquality()
                     .equals(other.newCityWasAdded, newCityWasAdded)) &&
+            (identical(other.wasAddedAsDefault, wasAddedAsDefault) ||
+                const DeepCollectionEquality()
+                    .equals(other.wasAddedAsDefault, wasAddedAsDefault)) &&
             (identical(other.listOfCities, listOfCities) ||
                 const DeepCollectionEquality()
                     .equals(other.listOfCities, listOfCities)));
@@ -204,6 +226,7 @@ class _$_AddCityState with DiagnosticableTreeMixin implements _AddCityState {
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(basicError) ^
       const DeepCollectionEquality().hash(newCityWasAdded) ^
+      const DeepCollectionEquality().hash(wasAddedAsDefault) ^
       const DeepCollectionEquality().hash(listOfCities);
 
   @JsonKey(ignore: true)
@@ -217,6 +240,7 @@ abstract class _AddCityState implements AddCityState {
       {required bool isLoading,
       required BasicError basicError,
       required bool newCityWasAdded,
+      required bool wasAddedAsDefault,
       required List<AutocompleteModel> listOfCities}) = _$_AddCityState;
 
   @override
@@ -225,6 +249,8 @@ abstract class _AddCityState implements AddCityState {
   BasicError get basicError => throw _privateConstructorUsedError;
   @override
   bool get newCityWasAdded => throw _privateConstructorUsedError;
+  @override
+  bool get wasAddedAsDefault => throw _privateConstructorUsedError;
   @override
   List<AutocompleteModel> get listOfCities =>
       throw _privateConstructorUsedError;

@@ -6,6 +6,7 @@ class AddCityState with _$AddCityState {
     required bool isLoading,
     required BasicError basicError,
     required bool newCityWasAdded,
+    required bool wasAddedAsDefault,
     required List<AutocompleteModel> listOfCities,
   }) = _AddCityState;
 
@@ -14,6 +15,7 @@ class AddCityState with _$AddCityState {
       isLoading: false,
       basicError: BasicError.empty(),
       newCityWasAdded: false,
+      wasAddedAsDefault: false,
       listOfCities: [],
     );
   }

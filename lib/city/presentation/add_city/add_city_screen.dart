@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_example/app/injectable/injection.dart';
 import 'package:weather_example/app/presentation/common_snack_bar.dart';
 import 'package:weather_example/city/application/add_city/add_city_bloc.dart';
+import 'package:weather_example/city/application/cities_bloc/cities_bloc.dart';
 import 'package:weather_example/city/presentation/add_city/widgets/search_body.dart';
 import 'package:weather_example/city/presentation/add_city/widgets/search_field.dart';
 
@@ -35,6 +36,9 @@ class AddCityScreen extends StatelessWidget {
                 }
 
                 if (state.newCityWasAdded) {
+                  if (state.wasAddedAsDefault) {
+                    BlocProvider.of<CitiesBloc>(context).add(const CitiesEvent.getDefaultCity());
+                  }
                   Navigator.of(context).pop();
                 }
               },

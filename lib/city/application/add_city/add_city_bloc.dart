@@ -36,11 +36,13 @@ class AddCityBloc extends Bloc<AddCityEvent, AddCityState> {
     if (event.q.isEmpty) {
       yield state.copyWith(
         isLoading: false,
+        wasAddedAsDefault: false,
         listOfCities: [],
       );
     } else {
       yield state.copyWith(
         isLoading: true,
+        wasAddedAsDefault: false,
         basicError: BasicError.empty(),
       );
       final cities = await iCityFacade.searchList(q: event.q);
@@ -48,6 +50,7 @@ class AddCityBloc extends Bloc<AddCityEvent, AddCityState> {
       yield state.copyWith(
         isLoading: false,
         listOfCities: cities,
+        wasAddedAsDefault: false,
       );
     }
   }
@@ -64,6 +67,7 @@ class AddCityBloc extends Bloc<AddCityEvent, AddCityState> {
       (l) async* {
         yield state.copyWith(
           isLoading: false,
+          wasAddedAsDefault: false,
           basicError: l,
         );
       },
@@ -71,6 +75,7 @@ class AddCityBloc extends Bloc<AddCityEvent, AddCityState> {
         yield state.copyWith(
           isLoading: false,
           newCityWasAdded: r,
+          wasAddedAsDefault: event.isDefault,
         );
       },
     );
