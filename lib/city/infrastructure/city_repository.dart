@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:weather_example/app/domain/basic_error.dart';
+import 'package:weather_example/app/domain/table_key.dart';
 import 'package:weather_example/app/infrastructure/network_service.dart';
 import 'package:weather_example/city/domain/city_model.dart';
 import 'package:weather_example/city/domain/i_city_facade.dart';
@@ -20,8 +21,6 @@ class CityRepository implements ICityFacade {
   final Database db;
   final NetworkService networkService;
 
-  static String table = 'Cities';
-
   @override
   Future<Either<BasicError, bool>> addCity({
     required AutocompleteModel city,
@@ -31,7 +30,7 @@ class CityRepository implements ICityFacade {
     final now = DateTime.now();
     final defaultDate = DateTime(now.year, now.month - 1, now.day);
     try {
-      savedCity = await db.insert(table, {
+      savedCity = await db.insert(TableKey.cities, {
         'id': city.key,
         'autocompleteModel': jsonEncode(city.toJson()),
         'isDefault': isDefault,
@@ -41,7 +40,7 @@ class CityRepository implements ICityFacade {
       });
 
       if (savedCity != 0 && isDefault) {
-        await db.update(table, {'isDefault': false}, where: 'id != ${city.key}');
+        await db.update(TableKey.cities, {'isDefault': false}, where: 'id != ${city.key}');
       }
     } on PlatformException catch (e) {
       return left(BasicError.error(e));
@@ -74,11 +73,11 @@ class CityRepository implements ICityFacade {
 
   @override
   Future<Option<CityModel>> getDefaultCity() async {
-    final myDefaultQuery = await db.query(table, where: 'isDefault = 1');
+    final myDefaultQuery = await db.query(TableKey.cities, where: 'isDefault = 1');
     List<CityModel> values = CityModel.listFromJson(myDefaultQuery);
 
     if (values.isEmpty) {
-      final firstValue = await db.query(table);
+      final firstValue = await db.query(TableKey.cities);
       values = CityModel.listFromJson(firstValue);
 
       if (values.isEmpty) {
@@ -91,7 +90,7 @@ class CityRepository implements ICityFacade {
 
   @override
   Future<List<CityModel>> getCities() async {
-    final cities = await db.query(table);
+    final cities = await db.query(TableKey.cities);
 
     return CityModel.listFromJson(cities);
   }

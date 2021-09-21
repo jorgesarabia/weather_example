@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:weather_example/app/domain/basic_error.dart';
+import 'package:weather_example/app/domain/table_key.dart';
 import 'package:weather_example/app/infrastructure/network_service.dart';
 import 'package:weather_example/weather/domain/current_condition.dart';
 import 'package:weather_example/weather/domain/five_days.dart';
@@ -19,8 +20,6 @@ class WeatherRepository implements IWeatherFacade {
   final Database db;
   final NetworkService networkService;
 
-  static String table = 'Cities';
-
   @override
   Future<Either<BasicError, CurrentConditions>> getCurrentCondition({required int cityId}) async {
     final httpResponse = await networkService.get(
@@ -32,7 +31,7 @@ class WeatherRepository implements IWeatherFacade {
     if (httpResponse.statusCode == 200) {
       final responseBody = jsonDecode(httpResponse.body);
       await db.update(
-        table,
+        TableKey.cities,
         {
           'lastWeather': httpResponse.body,
           'lastMeasureSinceEpoch': DateTime.now().millisecondsSinceEpoch,
@@ -57,7 +56,7 @@ class WeatherRepository implements IWeatherFacade {
     if (httpResponse.statusCode == 200) {
       final responseBody = jsonDecode(httpResponse.body);
       await db.update(
-        table,
+        TableKey.cities,
         {
           'fiveDays': httpResponse.body,
           'lastMeasureSinceEpoch': DateTime.now().millisecondsSinceEpoch,
