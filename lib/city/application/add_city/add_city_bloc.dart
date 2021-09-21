@@ -33,21 +33,17 @@ class AddCityBloc extends Bloc<AddCityEvent, AddCityState> {
       return;
     }
 
-    yield state.copyWith(
-      isLoading: true,
-      basicError: BasicError.empty(),
-    );
-
-    // final cities = await iCityFacade.searchList(q: event.q);
-    await Future.delayed(const Duration(milliseconds: 1500));
-
     if (event.q.isEmpty) {
       yield state.copyWith(
         isLoading: false,
         listOfCities: [],
       );
     } else {
-      final cities = _mockListOfCities();
+      yield state.copyWith(
+        isLoading: true,
+        basicError: BasicError.empty(),
+      );
+      final cities = await iCityFacade.searchList(q: event.q);
 
       yield state.copyWith(
         isLoading: false,
